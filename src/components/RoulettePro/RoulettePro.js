@@ -13,11 +13,6 @@ import './styles.css';
 
 const itemWidth = 205;
 
-/**
- * сделать так, чтобы после изменения start в false,
- * рулетка не изменяла положение
- */
-
 const RoulettePro = ({ prizes, prizeIndex, start, debug, onPrizeDefined }) => {
   const [init, setInit] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
