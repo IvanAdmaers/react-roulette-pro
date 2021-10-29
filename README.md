@@ -15,12 +15,12 @@
 
 ## Features
 
-🚀 Optimization
-⚙️ Multifunctional
-💪 Powerful
-✅ Ease to use
-📝MIT license
-🔥Just cool
+🚀 Optimization 
+⚙️ Multifunctional 
+💪 Powerful 
+✅ Ease to use 
+📝MIT license 
+🔥Just cool 
 📦 Lightweight
 
 ## Installation
@@ -38,8 +38,8 @@ yarn add react-roulette-pro
 ```jsx
 import React, { useState } from  'react';
 
-import RoulettePro from  'react-roulette-pro';
-import  'react-roulette-pro/dist/index.css';
+import RoulettePro from 'react-roulette-pro';
+import 'react-roulette-pro/dist/index.css';
 
 const goods = [
   {
@@ -75,7 +75,7 @@ const arrayReproduction = (array = [], length = 0) => [
     .map(() => array[Math.floor(Math.random() * array.length)]),
 ];
 
-const Test = () => {
+const App = () => {
   const [start, setStart] = useState(false);
 
   const prizes = [
