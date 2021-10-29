@@ -4,7 +4,7 @@
   "description": "The best React roulette",
   "author": "IvanAdmaers",
   "license": "MIT",
-  "repository": "IvanAdmaers/react-roulette-pro",
+  "repository": "https://github.com/IvanAdmaers/react-roulette-pro",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
