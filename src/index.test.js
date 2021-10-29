@@ -1,7 +1,7 @@
-import { ExampleComponent } from '.'
+import RoulettePro from '.';
 
 describe('ExampleComponent', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
-  })
-})
+    expect(RoulettePro).toBeTruthy();
+  });
+});
