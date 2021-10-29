@@ -110,30 +110,30 @@ const RoulettePro = ({ prizes, prizeIndex, start, debug, onPrizeDefined }) => {
   }, [contentRef, log, handlePrizeDefined]);
 
   return (
-    <div className='roulette-pro-wrapper'>
-      <div className='roulette-pro-prizes'>
-        <div ref={conteinerRef} className='roulette-pro-prizes-container'>
-          <div className='roulette-pro-effects' />
+    <div className="roulette-pro-wrapper">
+      <div className="roulette-pro-prizes">
+        <div ref={conteinerRef} className="roulette-pro-prizes-container">
+          <div className="roulette-pro-effects" />
           <div
             ref={contentRef}
-            className='roulette-pro-content'
+            className="roulette-pro-content"
             style={!Object.keys(inlineStyles).length ? {} : inlineStyles}
           >
             {prizes.map(({ id, image, text }, index) => (
               <div
                 key={`roulette-pro-item-key-${id}-${index}`}
-                className='roulette-pro-prize-item'
+                className="roulette-pro-prize-item"
               >
-                <div className='roulette-pro-prize-item-wrapper'>
-                  <div className='roulette-pro-image-wrapper'>
+                <div className="roulette-pro-prize-item-wrapper">
+                  <div className="roulette-pro-image-wrapper">
                     <img
-                      className='roulette-pro-prize-image'
+                      className="roulette-pro-prize-image"
                       src={image}
                       alt={text}
-                      draggable='false'
+                      draggable="false"
                     />
                   </div>
-                  <div className='roulette-pro-prize-title'>{text}</div>
+                  <div className="roulette-pro-prize-title">{text}</div>
                 </div>
               </div>
             ))}
