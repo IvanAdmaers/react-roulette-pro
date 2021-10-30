@@ -112,24 +112,24 @@ Where * means required
 
 ## FAQ
 
-🧐**How can I add my own CSS styles?**
+🧐**How can I add my own CSS styles?**  
 📣 You just can override default styles. All default styles has a CSS class starts with *react-roulette-pro-[class]*.
 
-🧐**Is it possible to use this package with SSR?**
+🧐**Is it possible to use this package with SSR?**  
 📣 Yes! This package does not use a global object *window*. You can use this package without any problems. And I'd like to recommend you to use *dynamic* in NextJS to decrease your bundle size and render it only on client side.
 ```javascript
 import dynamic from 'next/dynamic';
 
 const ReactRoulette = dynamic(() => import('react-roulette-pro', { ssr: false }));
 ```
-🧐**What version of React does this package support?**
+🧐**What version of React does this package support?**  
 📣You versions should be:
 
  - react >=16.8.0
  - react-dom >=16.8.0
 and nodeJS >=10
  
-🧐**Are pull requests welcome?** 
+🧐**Are pull requests welcome?**  
 📣Any ideas to improve this package are very welcome!
 
 ## License
