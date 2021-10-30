@@ -11,17 +11,18 @@
 
 **The best** react roulette. 💪 Powerful  ⚙️ multifunctional 🚀 optimized implementation
 
-![React Roulette Pro Example](https://i.ibb.co/8KNMmnP/react-roulette-pro-example.gif)
+![React Roulette Pro Example](https://github.com/IvanAdmaers/react-roulette-pro/raw/main/demo/react-roulette-pro-example.gif)
 
 ## Features
 
-🚀 Optimization 
-⚙️ Multifunctional 
-💪 Powerful 
-✅ Ease to use 
-📝MIT license 
-🔥Just cool 
-📦 Lightweight
+ - 🚀 Optimization
+ - ⚙️ Multifunctional
+ - 💪 Powerful
+ - ✅ Ease to use
+ - 📝 MIT license 
+ - 🔥 Just cool
+ - 📦 Lightweight
+ - 🎉 NextJS and GatsbyJS support
 
 ## Installation
 
@@ -108,6 +109,28 @@ Where * means required
 | start* | `boolean` | - | It sets when the roulette must start spinning  |
 | onPrizeDefined | `function` | () => null | It function will be called when the roulette stops spinning |
 | debug | `boolean` | false | When the option is set to true, you can see the roulette logs in a browser console. For example, when initializing the roulette, when starting a spin, or when stopping a spin, etc. |
+
+## FAQ
+
+🧐**How can I add my own CSS styles?**
+📣 You just can override default styles. All default styles has a CSS class starts with *react-roulette-pro-[class]*.
+
+🧐**Is it possible to use this package with SSR?**
+📣 Yes! This package does not use a global object *window*. You can use this package without any problems. And I'd like to recommend you to use *dynamic* in NextJS to decrease your bundle size and render it only on client side.
+```javascript
+import dynamic from 'next/dynamic';
+
+const ReactRoulette = dynamic(() => import('react-roulette-pro', { ssr: false }));
+```
+🧐**What version of React does this package support?**
+📣You versions should be:
+
+ - react >=16.8.0
+ - react-dom >=16.8.0
+and nodeJS >=10
+ 
+🧐**Are pull requests welcome?** 
+📣Any ideas to improve this package are very welcome!
 
 ## License
 
