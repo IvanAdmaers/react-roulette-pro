@@ -9,6 +9,16 @@
     "url": "https://github.com/IvanAdmaers/react-roulette-pro"
   },
   "private": false,
+  "keywords": [
+    "react",
+    "roulette",
+    "spinning",
+    "wheel",
+    "fortune",
+    "prize",
+    "react-roulette",
+    "react-roulette-pro"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
