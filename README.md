@@ -120,7 +120,9 @@ Where * means required
 ```javascript
 import dynamic from 'next/dynamic';
 
-const ReactRoulette = dynamic(() => import('react-roulette-pro', { ssr: false }));
+const RoulettePro = dynamic(() => import('react-roulette-pro'), {
+  ssr: false,
+});
 ```
 🧐**What version of React does this package support?**  
 📣You versions should be:
