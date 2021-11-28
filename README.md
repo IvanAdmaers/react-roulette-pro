@@ -70,7 +70,7 @@ const goods = [
   },
 ];
 
-const arrayReproduction = (array = [], length = 0) => [
+const reproductionArray = (array = [], length = 0) => [
   ...Array(length)
     .fill('_')
     .map(() => array[Math.floor(Math.random() * array.length)]),
@@ -81,7 +81,7 @@ const App = () => {
 
   const prizes = [
     ...goods,
-    ...arrayReproduction(goods, goods.length * 3),
+    ...reproductionArray(goods, goods.length * 3),
     ...goods,
   ];
 
@@ -105,18 +105,18 @@ Where * means required
 | **Prop** | **Type** | **Default value** | **Description** |
 |--|--|--|--|
 | prizes* | `Array` | - | Array of object. Object must have required fields: `id, image, text` |
-| prizeIndex* | `number` | - | It sets the winning prize. in the range 0 and prizes.length - 1 |
+| prizeIndex* | `number` | - | It sets the winning prize. In the range 0 and prizes.length - 1 |
 | start* | `boolean` | - | It sets when the roulette must start spinning  |
-| onPrizeDefined | `function` | () => null | It function will be called when the roulette stops spinning |
+| onPrizeDefined | `function` | () => null | It function calls when the roulette stops spinning |
 | debug | `boolean` | false | When the option is set to true, you can see the roulette logs in a browser console. For example, when initializing the roulette, when starting a spin, or when stopping a spin, etc. |
 
 ## FAQ
 
-🧐**How can I add my own CSS styles?**  
-📣 You just can override default styles. All default styles has a CSS class starts with *react-roulette-pro-[class]*.
+🧐 **How can I add my own CSS styles?**  
+📣 You can just override default styles. All default styles has a CSS class starts with *react-roulette-pro-[class]*.
 
-🧐**Is it possible to use this package with SSR?**  
-📣 Yes! This package does not use a global object *window*. You can use this package without any problems. And I'd like to recommend you to use *dynamic* in NextJS to decrease your bundle size and render it only on client side.
+🧐 **Is it possible to use this package with SSR?**  
+📣 Of course! This package does not use a global object *window*. You can use this package without any problems. And I'd like to recommend you to use *dynamic* in NextJS to decrease your bundle size and render it only on client side.
 ```javascript
 import dynamic from 'next/dynamic';
 
@@ -124,15 +124,14 @@ const RoulettePro = dynamic(() => import('react-roulette-pro'), {
   ssr: false,
 });
 ```
-🧐**What version of React does this package support?**  
-📣You versions should be:
-
+🧐 **What version of React does this package support?**  
+📣 Your versions should be:
  - react >=16.8.0
  - react-dom >=16.8.0
-and nodeJS >=10
+ - NodeJS >=10
  
-🧐**Are pull requests welcome?**  
-📣Any ideas to improve this package are very welcome!
+🧐 **Are pull requests welcome?**  
+📣 Any ideas to improve this package are very welcome!
 
 ## License
 
