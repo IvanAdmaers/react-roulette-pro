@@ -44,12 +44,20 @@ const SimpleUsage = () => {
 
   const prizeIndex = goods.length * 4 + 2;
 
+  const speed = 10;
+
   const handleStart = () => setStart(true);
 
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Simple usage</h1>
-      <RoulettePro prizes={prizes} prizeIndex={prizeIndex} start={start} />
+      <RoulettePro
+        prizes={prizes}
+        prizeIndex={prizeIndex}
+        start={start}
+        speed={speed}
+        debug
+      />
       <div style={{ textAlign: 'center', marginTop: 5 }}>
         <button onClick={handleStart}>Start</button>
       </div>
