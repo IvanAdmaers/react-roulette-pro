@@ -22,7 +22,7 @@
  - 📝 MIT license 
  - 🔥 Just cool
  - 📦 Lightweight
- - 🎉 NextJS and GatsbyJS support
+ - 🎉 NextJS, GatsbyJS and RemixJS support
 
 ## Installation
 
