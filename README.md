@@ -108,6 +108,7 @@ Where * means required
 | prizeIndex* | `number` | - | It sets the winning prize. In the range 0 and prizes.length - 1 |
 | start* | `boolean` | - | It sets when the roulette must start spinning  |
 | onPrizeDefined | `function` | () => null | It function calls when the roulette stops spinning |
+| speed | `number` | 8 | The roulette spinning speed in seconds |
 | debug | `boolean` | false | When the option is set to true, you can see the roulette logs in a browser console. For example, when initializing the roulette, when starting a spin, or when stopping a spin, etc. |
 
 ## FAQ
