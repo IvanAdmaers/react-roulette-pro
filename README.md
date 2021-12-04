@@ -141,6 +141,8 @@ const RoulettePro = dynamic(() => import('react-roulette-pro'), {
 2. Run
 
 ```bash
+npm ci i
+
 npm start
 ```
 
@@ -151,6 +153,8 @@ This command runs microbundle to compile our package to a dist folder.
 4. Run
 
 ```bash
+npm ci i
+
 npm start
 ```
 
