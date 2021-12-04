@@ -134,6 +134,33 @@ const RoulettePro = dynamic(() => import('react-roulette-pro'), {
 🧐 **Are pull requests welcome?**  
 📣 Any ideas to improve this package are very welcome!
 
+## How to bootstrap the project locally
+
+1. Clone the project
+
+2. Run
+
+```bash
+npm start
+```
+
+This command runs microbundle to compile our package to a dist folder.
+
+3. cd/example  
+
+4. Run
+
+```bash
+npm start
+```
+
+This command runs create-react-app dev server  
+
+5. Enjoy the magic!  
+
+This project was bootstrapped with
+[create-react-library](https://www.npmjs.com/package/create-react-library)
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
