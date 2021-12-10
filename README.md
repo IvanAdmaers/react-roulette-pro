@@ -146,9 +146,9 @@ npm ci i
 npm start
 ```
 
-This command runs microbundle to compile our package to a dist folder.
+The last command runs microbundle to compile our package to a dist folder.
 
-3. cd/example  
+3. cd /example  
 
 4. Run
 
@@ -158,9 +158,11 @@ npm ci i
 npm start
 ```
 
-This command runs create-react-app dev server  
+The last command runs create-react-app dev server  
 
 5. Enjoy the magic!  
+
+![enjoying the magic](https://media.giphy.com/media/olAik8MhYOB9K/giphy.gif)
 
 This project was bootstrapped with
 [create-react-library](https://www.npmjs.com/package/create-react-library)
