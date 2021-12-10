@@ -76,7 +76,7 @@ const AdvancedUsage = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [winText, setWinText] = useState('');
 
-  const speed = 10;
+  const spinningTime = 10;
 
   const prepareNewSpin = () => {
     setStart(false);
@@ -119,7 +119,7 @@ const AdvancedUsage = () => {
           prizeIndex={prizeIndex}
           start={start}
           onPrizeDefined={handleEnd}
-          speed={speed}
+          spinningTime={spinningTime}
         />
       </div>
       <div style={{ textAlign: 'center', marginTop: 5 }}>
