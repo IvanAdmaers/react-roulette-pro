@@ -44,7 +44,7 @@ const SimpleUsage = () => {
 
   const prizeIndex = goods.length * 4 + 2;
 
-  const speed = 10;
+  const spinningTime = 10;
 
   const handleStart = () => setStart(true);
 
@@ -55,7 +55,7 @@ const SimpleUsage = () => {
         prizes={prizes}
         prizeIndex={prizeIndex}
         start={start}
-        speed={speed}
+        spinningTime={spinningTime}
         debug
       />
       <div style={{ textAlign: 'center', marginTop: 5 }}>
