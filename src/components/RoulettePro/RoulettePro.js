@@ -19,7 +19,7 @@ const RoulettePro = ({
   start,
   debug,
   onPrizeDefined,
-  speed,
+  spinningTime,
 }) => {
   const [init, setInit] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -76,7 +76,7 @@ const RoulettePro = ({
     log('Start spinning ⏱');
 
     return {
-      transition: `all ${speed}s cubic-bezier(0.0125, 0.1, 0.1, 1) 0s`,
+      transition: `all ${spinningTime}s cubic-bezier(0.0125, 0.1, 0.1, 1) 0s`,
       transform: `translate3d(-${prizeOffset}px, 0px, 0px)`,
     };
   }, [init, start, prizeOffset, log]);
@@ -149,7 +149,7 @@ const RoulettePro = ({
 RoulettePro.defaultProps = {
   debug: false,
   onPrizeDefined: () => null,
-  speed: 8,
+  spinningTime: 8,
 };
 
 RoulettePro.propTypes = {
@@ -164,7 +164,7 @@ RoulettePro.propTypes = {
   start: PropTypes.bool.isRequired,
   debug: PropTypes.bool,
   onPrizeDefined: PropTypes.func,
-  speed: PropTypes.number,
+  spinningTime: PropTypes.number,
 };
 
 export default RoulettePro;
