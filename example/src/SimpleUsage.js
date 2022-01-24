@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import RoulettePro from 'react-roulette-pro';
 
@@ -47,6 +47,10 @@ const SimpleUsage = () => {
 
   const handleStart = () => setStart(true);
 
+  const handlePrizeDefined = useCallback(() => {
+    console.log('🥳 Prize defined! 🥳');
+  }, []);
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Simple usage</h1>
@@ -56,6 +60,7 @@ const SimpleUsage = () => {
         start={start}
         spinningTime={spinningTime}
         debug
+        onPrizeDefined={handlePrizeDefined}
       />
       <div style={{ textAlign: 'center', marginTop: 5 }}>
         <button onClick={handleStart}>Start</button>
