@@ -76,7 +76,7 @@ const AdvancedUsage = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [winText, setWinText] = useState('');
 
-  const spinningTime = 10;
+  const spinningTime = 1;
 
   const prepareNewSpin = () => {
     setStart(false);
@@ -102,7 +102,7 @@ const AdvancedUsage = () => {
     }, 0);
   };
 
-  const handleEnd = useCallback(() => {
+  const handlePrizeDefined = useCallback(() => {
     const { text } = goods.find((_, index) => index === goodIndex);
 
     setWinText(`🎉 Congratulations! You won ${text} 🎉`);
@@ -118,7 +118,7 @@ const AdvancedUsage = () => {
           prizes={prizes}
           prizeIndex={prizeIndex}
           start={start}
-          onPrizeDefined={handleEnd}
+          onPrizeDefined={handlePrizeDefined}
           spinningTime={spinningTime}
         />
       </div>
