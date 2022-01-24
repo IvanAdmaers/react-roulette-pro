@@ -79,7 +79,7 @@ const RoulettePro = ({
       transition: `all ${spinningTime}s cubic-bezier(0.0125, 0.1, 0.1, 1) 0s`,
       transform: `translate3d(-${prizeOffset}px, 0px, 0px)`,
     };
-  }, [init, start, prizeOffset, log]);
+  }, [init, start, prizeOffset, log, spinningTime]);
 
   // Set container width
   useEffect(() => {
