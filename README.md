@@ -77,14 +77,14 @@ const reproductionArray = (array = [], length = 0) => [
     .map(() => array[Math.floor(Math.random() * array.length)]),
 ];
 
+const prizes = [
+  ...goods,
+  ...reproductionArray(goods, goods.length * 3),
+  ...goods,
+];
+
 const App = () => {
   const [start, setStart] = useState(false);
-
-  const prizes = [
-    ...goods,
-    ...reproductionArray(goods, goods.length * 3),
-    ...goods,
-  ];
 
   const prizeIndex = goods.length * 4 + 2;
 

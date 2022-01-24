@@ -32,18 +32,16 @@ const goods = [
   },
 ];
 
+const prizes = [
+  ...goods,
+  ...reproductionArray(goods, goods.length * 3),
+  ...goods,
+];
+
 const SimpleUsage = () => {
   const [start, setStart] = useState(false);
 
-  const prizes = [
-    ...goods,
-    ...reproductionArray(goods, goods.length * 3),
-    ...goods,
-  ];
-
   const prizeIndex = goods.length * 4 + 2;
-
-  const spinningTime = 10;
 
   const handleStart = () => setStart(true);
 
@@ -58,8 +56,6 @@ const SimpleUsage = () => {
         prizes={prizes}
         prizeIndex={prizeIndex}
         start={start}
-        spinningTime={spinningTime}
-        debug
         onPrizeDefined={handlePrizeDefined}
       />
       <div style={{ textAlign: 'center', marginTop: 5 }}>
