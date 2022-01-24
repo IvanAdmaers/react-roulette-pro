@@ -37,7 +37,7 @@ yarn add react-roulette-pro
 ## Usage
 
 ```jsx
-import React, { useState } from  'react';
+import React, { useState, useCallback } from  'react';
 
 import RoulettePro from 'react-roulette-pro';
 import 'react-roulette-pro/dist/index.css';
@@ -89,9 +89,18 @@ const App = () => {
 
   const handleStart = () => setStart(true);
 
+  const handlePrizeDefined = useCallback(() => {
+    console.log('🥳 Prize defined! 🥳');
+  }, []);
+
   return (
     <>
-      <RoulettePro prizes={prizes} prizeIndex={prizeIndex} start={start} />
+      <RoulettePro
+        prizes={prizes}
+        prizeIndex={prizeIndex}
+        start={start}
+        onPrizeDefined={handlePrizeDefined}
+      />
       <button onClick={handleStart}>Start</button>
     </>
   );
