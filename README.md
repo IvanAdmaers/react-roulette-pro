@@ -40,6 +40,7 @@ yarn add react-roulette-pro
 import React, { useState, useCallback } from  'react';
 
 import RoulettePro from 'react-roulette-pro';
+
 import 'react-roulette-pro/dist/index.css';
 
 const goods = [
@@ -157,7 +158,7 @@ npm start
 
 The last command runs microbundle to compile our package to a dist folder.
 
-3. cd /example  
+3. cd example/  
 
 4. Run
 
