@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import RoulettePro from 'react-roulette-pro';
 
@@ -61,74 +61,79 @@ const goods = [
 const getPrizes = () => [
   ...goods,
   ...reproductionArray(goods, 10),
+  ...reproductionArray(goods, 10),
   ...goods,
   ...reproductionArray(goods, 10),
 ];
-const getGoodIndex = () => getRandomIntInRange(0, goods.length - 1);
-const getPrizeIndex = (goodIndex = 0) => 10 + 10 + goodIndex;
+
+const getRandomGoodIndex = () => getRandomIntInRange(0, goods.length - 1);
+const getPrizeOffset = (goodIndex = 0) => 10 + 10 + 10 + goodIndex;
+
+const getPrizeIndex = () => {
+  const randomGoodIndex = getRandomGoodIndex();
+  const getRandomGoodOffset = getPrizeOffset(randomGoodIndex);
+
+  return getRandomGoodOffset;
+};
+
+const prizes = getPrizes();
 
 const AdvancedUsage = () => {
-  const [isFirstSpin, setIsFirstSpin] = useState(true);
-  const [goodIndex, setGoodIndex] = useState(() => getGoodIndex());
-  const [prizes, setPrizes] = useState(() => getPrizes());
-  const [prizeIndex, setPrizeIndex] = useState(() => getPrizeIndex(goodIndex));
   const [start, setStart] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [prizeIndex, setPrizeIndex] = useState(0);
+  const [spinning, setSpinning] = useState(false);
   const [winText, setWinText] = useState('');
 
-  const spinningTime = 1;
-
-  const prepareNewSpin = () => {
-    setStart(false);
-
-    const newGoodIndex = getGoodIndex();
-    const newPrizes = getPrizes();
-    const newPrizeIndex = getPrizeIndex(newGoodIndex);
-
-    setGoodIndex(newGoodIndex);
-    setPrizes(newPrizes);
-    setPrizeIndex(newPrizeIndex);
-  };
-
-  const handleStart = () => {
-    if (!isFirstSpin) {
-      prepareNewSpin();
+  useEffect(() => {
+    if (!prizeIndex) {
+      return;
     }
 
-    setTimeout(() => {
-      setWinText('');
-      setButtonDisabled(true);
-      setStart(true);
-    }, 0);
+    setStart(true);
+  }, [prizeIndex]);
+
+  useEffect(() => {
+    if (!prizeIndex || spinning) {
+      return;
+    }
+
+    const { text } = prizes[prizeIndex];
+
+    setWinText(`🎉 Congratulations! You won ${text} 🎉`);
+  }, [prizeIndex, spinning]);
+
+  const handleStart = () => {
+    const currentPrizeIndex = getPrizeIndex();
+
+    setStart(false);
+    setPrizeIndex(currentPrizeIndex);
+    setSpinning(true);
+    setWinText('');
   };
 
   const handlePrizeDefined = useCallback(() => {
-    const { text } = goods.find((_, index) => index === goodIndex);
+    console.log('🥳 Prize defined! 🥳');
 
-    setWinText(`🎉 Congratulations! You won ${text} 🎉`);
-    setButtonDisabled(false);
-    setIsFirstSpin(false);
-  }, [goodIndex]);
+    setSpinning(false);
+  }, []);
 
   return (
-    <>
+    <div>
       <h1 style={{ textAlign: 'center' }}>Advanced usage</h1>
-      <div>
-        <RoulettePro
-          prizes={prizes}
-          prizeIndex={prizeIndex}
-          start={start}
-          onPrizeDefined={handlePrizeDefined}
-          spinningTime={spinningTime}
-        />
-      </div>
+      <RoulettePro
+        prizes={prizes}
+        prizeIndex={prizeIndex}
+        start={start}
+        spinningTime={2}
+        onPrizeDefined={handlePrizeDefined}
+      />
       <div style={{ textAlign: 'center', marginTop: 5 }}>
-        <button disabled={buttonDisabled} onClick={handleStart}>
-          start
+        <button onClick={handleStart} disabled={spinning}>
+          Start
         </button>
         {winText && <div>{winText}</div>}
       </div>
-    </>
+    </div>
   );
 };
 
