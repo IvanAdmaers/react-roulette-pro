@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import RoulettePro from 'react-roulette-pro';
-import 'react-roulette-pro/dist/index.css';
 
 import reproductionArray from './utills/reproductionArray';
 
