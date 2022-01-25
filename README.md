@@ -114,14 +114,19 @@ Where * means required
 
 | **Prop** | **Type** | **Default value** | **Description** |
 |--|--|--|--|
-| prizes* | `Array` | - | Array of object. Object must have required fields: `id, image, text` |
+| prizes* | `Array` | - | Array of objects. Object must have required fields: `id` and `image, text` if you don't pass `prizeRenderFunction` prop.  |
 | prizeIndex* | `number` | - | It sets the winning prize. In the range 0 and prizes.length - 1 |
 | start* | `boolean` | - | It sets when the roulette must start spinning  |
 | onPrizeDefined | `function` | () => null | It function calls when the roulette stops spinning |
 | spinningTime | `number` | 8 | The roulette spinning time in seconds |
 | debug | `boolean` | false | When the option is set to true, you can see the roulette logs in a browser console. For example, when initializing the roulette, when starting a spin, or when stopping a spin, etc. |
+| prizeRenderFunction | `function` | (prize, index) => ( {/* JSX */} ) | Renders the prize items. Pass `prize` object and an array index |
+| prizeWidth | `number` | 205 | Sets a width for the prize items |
 
 ## FAQ
+
+🧐 **How can I customize the roulette prize items?**  
+📣 You can use the *prizeRenderFunction* prop for render your custom prize items. To change the prize items width pass the *prizeWidth* prop. Take a look at the ["Advanced Example"](https://github.com/IvanAdmaers/react-roulette-pro/blob/main/example/src/AdvancedUsage.js).
 
 🧐 **How can I add my own CSS styles?**  
 📣 You can just override default styles. All default styles has a CSS class starts with *react-roulette-pro-[class]*.
