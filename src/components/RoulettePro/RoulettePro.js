@@ -5,6 +5,7 @@ import React, {
   useRef,
   useMemo,
   useCallback,
+  Fragment,
 } from 'react';
 
 import { getPrizeOffset, getPrizeAdditionalOffset } from './utills';
@@ -13,6 +14,20 @@ import './styles.css';
 
 const itemWidth = 205;
 
+const defaultPrizeRenderFunction = ({ image, text }) => (
+  <Fragment>
+    <div className="roulette-pro-image-wrapper">
+      <img
+        className="roulette-pro-prize-image"
+        src={image}
+        alt={text}
+        draggable="false"
+      />
+    </div>
+    <div className="roulette-pro-prize-title">{text}</div>
+  </Fragment>
+);
+
 const RoulettePro = ({
   prizes,
   prizeIndex,
@@ -20,6 +35,7 @@ const RoulettePro = ({
   debug,
   onPrizeDefined,
   spinningTime,
+  prizeRenderFunction,
 }) => {
   const [init, setInit] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -111,6 +127,22 @@ const RoulettePro = ({
     return () => content.removeEventListener('transitionend', listener);
   }, [contentRef, log, handlePrizeDefined]);
 
+  // Prizes element
+  const prizesElement = useMemo(
+    () =>
+      prizes.map((prize, index) => (
+        <div
+          key={`roulette-pro-item-key-${prize.id}-${index}`}
+          className="roulette-pro-prize-item"
+        >
+          <div className="roulette-pro-prize-item-wrapper">
+            {prizeRenderFunction(prize, index)}
+          </div>
+        </div>
+      )),
+    [prizes, prizeRenderFunction],
+  );
+
   return (
     <div className="roulette-pro-wrapper">
       <div className="roulette-pro-prizes">
@@ -121,24 +153,7 @@ const RoulettePro = ({
             className="roulette-pro-content"
             style={!Object.keys(inlineStyles).length ? {} : inlineStyles}
           >
-            {prizes.map(({ id, image, text }, index) => (
-              <div
-                key={`roulette-pro-item-key-${id}-${index}`}
-                className="roulette-pro-prize-item"
-              >
-                <div className="roulette-pro-prize-item-wrapper">
-                  <div className="roulette-pro-image-wrapper">
-                    <img
-                      className="roulette-pro-prize-image"
-                      src={image}
-                      alt={text}
-                      draggable="false"
-                    />
-                  </div>
-                  <div className="roulette-pro-prize-title">{text}</div>
-                </div>
-              </div>
-            ))}
+            {prizesElement}
           </div>
         </div>
       </div>
@@ -150,14 +165,15 @@ RoulettePro.defaultProps = {
   debug: false,
   onPrizeDefined: () => null,
   spinningTime: 8,
+  prizeRenderFunction: defaultPrizeRenderFunction,
 };
 
 RoulettePro.propTypes = {
   prizes: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
+      image: PropTypes.string,
+      text: PropTypes.string,
     }).isRequired,
   ).isRequired,
   prizeIndex: PropTypes.number.isRequired,
@@ -165,6 +181,7 @@ RoulettePro.propTypes = {
   debug: PropTypes.bool,
   onPrizeDefined: PropTypes.func,
   spinningTime: PropTypes.number,
+  prizeRenderFunction: PropTypes.func,
 };
 
 export default RoulettePro;
