@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Fragment } from 'react';
 
 import RoulettePro from 'react-roulette-pro';
+
+import classes from './AdvancedUsage.module.css';
 
 import reproductionArray from './utills/reproductionArray';
 import getRandomIntInRange from './utills/getRandomIntInRange';
@@ -78,6 +80,20 @@ const getPrizeIndex = () => {
 
 const prizes = getPrizes();
 
+const prizeRenderFunction = ({ image, text }, index) => (
+  <Fragment>
+    <div className={classes['prize-image-wrapper']}>
+      <img className={classes['prize-image']} src={image} alt={text} />
+    </div>
+    <div className={classes['prize-content']}>
+      <p className={classes['prize-text']}>{text}</p>
+      {(index === 3 || Math.random() > 0.8) && (
+        <p className={classes['super-prize']}>Super Prize</p>
+      )}
+    </div>
+  </Fragment>
+);
+
 const AdvancedUsage = () => {
   const [start, setStart] = useState(false);
   const [prizeIndex, setPrizeIndex] = useState(0);
@@ -126,6 +142,7 @@ const AdvancedUsage = () => {
         start={start}
         spinningTime={2}
         onPrizeDefined={handlePrizeDefined}
+        prizeRenderFunction={prizeRenderFunction}
       />
       <div style={{ textAlign: 'center', marginTop: 5 }}>
         <button onClick={handleStart} disabled={spinning}>
