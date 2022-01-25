@@ -116,6 +116,7 @@ const AdvancedUsage = () => {
     const { text } = prizes[prizeIndex];
 
     setWinText(`🎉 Congratulations! You won ${text} 🎉`);
+    setSpinning(true);
   }, [prizeIndex, spinning]);
 
   const handleStart = () => {
@@ -123,7 +124,6 @@ const AdvancedUsage = () => {
 
     setStart(false);
     setPrizeIndex(currentPrizeIndex);
-    setSpinning(true);
     setWinText('');
   };
 
