@@ -121,7 +121,7 @@ Where * means required
 | spinningTime | `number` | 8 | The roulette spinning time in seconds |
 | debug | `boolean` | false | When the option is set to true, you can see the roulette logs in a browser console. For example, when initializing the roulette, when starting a spin, or when stopping a spin, etc. |
 | prizeRenderFunction | `function` | (prize, index) => ( {/* JSX */} ) | Renders the prize items. Pass `prize` object and an array index |
-| prizeWidth | `number` | 205 | Sets a width for the prize items |
+| prizeWidth | `number` | 205 | Sets a width for the prize items in pixels |
 
 ## FAQ
 
