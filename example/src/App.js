@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './App.css';
+
 import AdvancedUsage from './AdvancedUsage';
 import SimpleUsage from './SimpleUsage';
 
