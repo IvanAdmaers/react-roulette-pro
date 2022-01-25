@@ -106,6 +106,7 @@ const AdvancedUsage = () => {
     }
 
     setStart(true);
+    setSpinning(true);
   }, [prizeIndex]);
 
   useEffect(() => {
@@ -116,7 +117,6 @@ const AdvancedUsage = () => {
     const { text } = prizes[prizeIndex];
 
     setWinText(`🎉 Congratulations! You won ${text} 🎉`);
-    setSpinning(true);
   }, [prizeIndex, spinning]);
 
   const handleStart = () => {
