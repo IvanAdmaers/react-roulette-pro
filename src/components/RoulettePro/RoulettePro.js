@@ -12,8 +12,6 @@ import { getPrizeOffset, getPrizeAdditionalOffset } from './utills';
 
 import './styles.css';
 
-const itemWidth = 205;
-
 const defaultPrizeRenderFunction = ({ image, text }) => (
   <Fragment>
     <div className="roulette-pro-image-wrapper">
@@ -36,6 +34,7 @@ const RoulettePro = ({
   onPrizeDefined,
   spinningTime,
   prizeRenderFunction,
+  prizeWidth,
 }) => {
   const [init, setInit] = useState(false);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -67,15 +66,15 @@ const RoulettePro = ({
   const prizeOffset = useMemo(() => {
     if (!containerCenter) return;
 
-    const offset = getPrizeOffset(itemWidth, prizeIndex, containerCenter);
-    const additionalOffset = getPrizeAdditionalOffset(itemWidth);
+    const offset = getPrizeOffset(prizeWidth, prizeIndex, containerCenter);
+    const additionalOffset = getPrizeAdditionalOffset(prizeWidth);
 
     log('Initialized ✅');
 
     setInit(true);
 
     return offset + additionalOffset;
-  }, [containerCenter, prizeIndex, log]);
+  }, [containerCenter, prizeIndex, log, prizeWidth]);
 
   // Roulette inline styles
   const inlineStyles = useMemo(() => {
@@ -85,7 +84,7 @@ const RoulettePro = ({
 
     if (!start) {
       return {
-        transform: `translateX(-${itemWidth}px)`,
+        transform: `translateX(-${prizeWidth}px)`,
       };
     }
 
@@ -95,7 +94,7 @@ const RoulettePro = ({
       transition: `all ${spinningTime}s cubic-bezier(0.0125, 0.1, 0.1, 1) 0s`,
       transform: `translate3d(-${prizeOffset}px, 0px, 0px)`,
     };
-  }, [init, start, prizeOffset, log, spinningTime]);
+  }, [init, start, prizeOffset, log, spinningTime, prizeWidth]);
 
   // Set container width
   useEffect(() => {
@@ -134,13 +133,14 @@ const RoulettePro = ({
         <div
           key={`roulette-pro-item-key-${prize.id}-${index}`}
           className="roulette-pro-prize-item"
+          style={{ width: prizeWidth }}
         >
           <div className="roulette-pro-prize-item-wrapper">
             {prizeRenderFunction(prize, index)}
           </div>
         </div>
       )),
-    [prizes, prizeRenderFunction],
+    [prizes, prizeRenderFunction, prizeWidth],
   );
 
   return (
@@ -166,6 +166,7 @@ RoulettePro.defaultProps = {
   onPrizeDefined: () => null,
   spinningTime: 8,
   prizeRenderFunction: defaultPrizeRenderFunction,
+  prizeWidth: 205,
 };
 
 RoulettePro.propTypes = {
@@ -182,6 +183,7 @@ RoulettePro.propTypes = {
   onPrizeDefined: PropTypes.func,
   spinningTime: PropTypes.number,
   prizeRenderFunction: PropTypes.func,
+  prizeWidth: PropTypes.number,
 };
 
 export default RoulettePro;
