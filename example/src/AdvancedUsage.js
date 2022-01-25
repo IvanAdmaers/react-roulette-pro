@@ -111,6 +111,8 @@ const AdvancedUsage = () => {
 
   useEffect(() => {
     if (!prizeIndex || spinning) {
+      setWinText('');
+
       return;
     }
 
