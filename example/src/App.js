@@ -2,8 +2,8 @@ import React from 'react';
 
 import './App.css';
 
-import AdvancedUsage from './AdvancedUsage';
 import SimpleUsage from './SimpleUsage';
+import AdvancedUsage from './AdvancedUsage';
 
 import 'react-roulette-pro/dist/index.css';
 
