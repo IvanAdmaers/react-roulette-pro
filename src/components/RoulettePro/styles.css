@@ -44,10 +44,10 @@
 
 .roulette-pro-effects {
   position: absolute;
-  top: 5px;
+  top: 0;
   right: 0;
   left: 0;
-  bottom: 25px;
+  bottom: 0;
   overflow: hidden;
 }
 
