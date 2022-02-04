@@ -80,6 +80,7 @@
   position: relative;
   min-height: 226px;
   white-space: nowrap;
+  will-change: transform;
 }
 
 .roulette-pro-prize-item {
