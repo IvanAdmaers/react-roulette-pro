@@ -36,6 +36,7 @@ const prizes = [
   ...goods,
   ...reproductionArray(goods, goods.length * 3),
   ...goods,
+  ...reproductionArray(goods, goods.length),
 ];
 
 const SimpleUsage = () => {
