@@ -27,3 +27,7 @@
   font-style: italic;
   font-weight: bold;
 }
+
+.super-prize.hide {
+  opacity: 0;
+}

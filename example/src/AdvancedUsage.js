@@ -87,9 +87,13 @@ const prizeRenderFunction = ({ image, text }, index) => (
     </div>
     <div className={classes['prize-content']}>
       <p className={classes['prize-text']}>{text}</p>
-      {(index === 3 || Math.random() > 0.8) && (
-        <p className={classes['super-prize']}>Super Prize</p>
-      )}
+      <p
+        className={`${classes['super-prize']} ${
+          index !== 3 && Math.random() < 0.8 ? classes['hide'] : ''
+        }`}
+      >
+        Super Prize
+      </p>
     </div>
   </Fragment>
 );
