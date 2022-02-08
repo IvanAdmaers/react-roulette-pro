@@ -1,3 +1,3 @@
-import RoulettePro from './components/RoulettePro/RoulettePro';
+import RoulettePro from './components/RoulettePro';
 
 export default RoulettePro;
