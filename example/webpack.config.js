@@ -10,7 +10,7 @@ const target = isProduction ? 'browserslist' : 'web';
 
 const plugins = [
   new MiniCssExtractPlugin({
-    filename: '[name].[contenthash].css',
+    filename: '[name].css',
   }),
   new HtmlWebpackPlugin({
     template: './public/index.html',
