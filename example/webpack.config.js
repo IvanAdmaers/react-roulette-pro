@@ -10,7 +10,7 @@ const target = isProduction ? 'browserslist' : 'web';
 
 const plugins = [
   new MiniCssExtractPlugin({
-    filename: '[name].css',
+    filename: isProduction ? '[name].[contenthash].css' : '[name].css',
   }),
   new HtmlWebpackPlugin({
     template: './public/index.html',
@@ -35,6 +35,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    filename: isProduction ? '[name].[fullhash].js' : '[name].js',
     assetModuleFilename: 'assets/[hash][ext][query]',
     clean: true,
   },
