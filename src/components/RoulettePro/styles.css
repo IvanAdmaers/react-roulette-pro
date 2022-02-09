@@ -2,11 +2,7 @@
   box-sizing: border-box;
   position: relative;
   z-index: 2;
-  min-height: 265px;
-  background: rgba(0, 0, 0, 0.6);
   margin: 0;
-  /* padding: 33px 0 82px; */
-  padding: 33px 0 33px;
   color: #fff;
   overflow: hidden;
 }

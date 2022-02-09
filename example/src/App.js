@@ -343,6 +343,9 @@ const App = () => {
             prizeIndex={prizeIndex}
             onPrizeDefined={handlePrizeDefined}
             spinningTime={3}
+            classes={{
+              wrapper: 'roulette-pro-wrapper-additional-styles',
+            }}
           />
         </div>
         <div

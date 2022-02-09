@@ -9,6 +9,12 @@ body {
   margin: 0 auto;
 }
 
+.roulette-pro-wrapper-additional-styles {
+  padding: 33px 0 82px;
+  background: rgba(0, 0, 0, 0.6);
+  min-height: 265px;
+}
+
 @media (max-width: 600px) {
   .roulette {
     width: 100%;
