@@ -44,6 +44,7 @@ yarn add react-roulette-pro
 import React, { useState } from  'react';
 
 import RoulettePro from 'react-roulette-pro';
+import 'react-roulette-pro/dist/index.css';
 
 const prizes = [
   {

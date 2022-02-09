@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { nanoid } from 'nanoid';
 
 import RoulettePro from 'react-roulette-pro';
+import 'react-roulette-pro/dist/index.css';
 
 import './App.css';
 
