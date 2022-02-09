@@ -1,5 +1,7 @@
 const path = require('path');
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const isProduction = process.env.NODE_ENV === 'production';
 
 const mode = isProduction ? 'production' : 'development';
@@ -43,7 +45,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
@@ -55,4 +57,9 @@ module.exports = {
     react: reactExternal,
     'react-dom': reactDOMExternal,
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'index.css',
+    }),
+  ],
 };
