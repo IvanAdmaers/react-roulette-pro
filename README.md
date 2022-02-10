@@ -1,7 +1,5 @@
 # React Roulette Pro
 
-> React Roulette Pro **2.0** is coming soon! The roulette will become even more optimized, flexible and beautiful. See you soon with React Roulette Pro **2.0**!
-
 <div align="center">
   <a href="https://www.npmjs.com/package/react-roulette-pro">
     <img alt="npm version" src="https://img.shields.io/npm/v/react-roulette-pro" />
