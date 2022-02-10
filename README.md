@@ -12,9 +12,13 @@
   </a>
 </div>
 
-**The best** React roulette. Focus on customization, optimization and ease of use.
+**The best** React roulette. Focus on customization, optimization and ease of use. Live example - [react-roulette-pro.ivanadmaers.com](https://react-roulette-pro.ivanadmaers.com)
 
-![React Roulette Pro Example](https://i.ibb.co/fxPtcmx/react-roulette-pro-example-gif.gif)
+<div align="center">
+  <a href="https://react-roulette-pro.ivanadmaers.com">
+    <img src="https://i.ibb.co/fxPtcmx/react-roulette-pro-example-gif.gif" alt="React Roulette Pro Example" />
+  </a>
+</div>
 
 ## Features
 
@@ -170,7 +174,7 @@ designOptions={{
 ```jsx
 styles={{
   wrapper: 'className-for-wrapper',
-  plizeList: 'className-for-plize-list'
+  plizeList: 'className-for-plize-list',
 }}
 ```
 
@@ -224,6 +228,6 @@ The last command runs webpack dev server
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+[MIT](LICENSE.md)
 
 Copyright (c) 2021-present, Ivan Admaers
