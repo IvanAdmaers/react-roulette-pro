@@ -92,7 +92,7 @@ const App = () => {
   const prizeIndex = prizes.length * 4 + 2;
 
   const handleStart = () => {
-    setStart(true);
+    setStart((prevState) => !prevState);
   };
 
   const handlePrizeDefined = () => {
