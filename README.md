@@ -111,6 +111,8 @@ const App = () => {
     </>
   );
 };
+
+export default App;
 ```
 
 ## Props
