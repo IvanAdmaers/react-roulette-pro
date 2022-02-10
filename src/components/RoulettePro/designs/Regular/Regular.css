@@ -1,0 +1,71 @@
+/* Top */
+.roulette-pro-regular-design-top {
+  position: absolute;
+  z-index: 10;
+  width: 4px;
+  height: 100%;
+  background: #ff7524 linear-gradient(0deg, #ef3a28, #ff9305);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.50);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* Prize item */
+.roulette-pro-regular-prize-item {
+  text-align: center;
+}
+
+.roulette-pro-regular-prize-item:first-child .roulette-pro-regular-prize-item-wrapper {
+  border-left: none;
+}
+
+.roulette-pro-regular-prize-item-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* height: 215px; */
+  /* height: calc(100% - 10px); */
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #383f48;
+  background-color: #2e3640;
+  background: radial-gradient(farthest-corner, #2e3640 0, #13161a 100%);
+}
+
+.roulette-pro-regular-prize-item-wrapper.center {
+  justify-content: center;
+}
+
+.roulette-pro-regular-image-wrapper {
+  height: 170px;
+  overflow: hidden;
+}
+
+.roulette-pro-regular-prize-item-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.roulette-pro-regular-prize-item-text {
+  box-sizing: border-box;
+  display: block;
+  padding: 16px;
+  margin: auto 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: break-spaces;
+}
