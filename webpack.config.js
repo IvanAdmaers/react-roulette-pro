@@ -26,6 +26,7 @@ module.exports = {
     path: path.join(__dirname, '/dist'),
     filename: 'index.js',
     clean: true,
+    globalObject: 'this',
     library: {
       name: 'ReactRoulettePro',
       type: 'umd',
