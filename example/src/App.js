@@ -217,7 +217,7 @@ const App = () => {
 
       const { id } = prizeList[newPrizeIndex];
 
-      Toast.fire({ icon: 'info', title: `Should win id - ${id}` });
+      Toast.fire({ icon: 'info', title: `Must win id - ${id}` });
     };
 
     prepare();
