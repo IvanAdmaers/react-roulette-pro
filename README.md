@@ -127,8 +127,8 @@ Where * means required
 | onPrizeDefined | `function` | () => null | Function to be called when the roulette stops spinning |
 | spinningTime | `number` | 10 | The roulette spinning time in seconds |
 | prizeItemRenderFunction | `function` | (item, index, designOptions) => ( {/* JSX */} ) | Function that renders the roulette prize items. Must returns a `li` element that has a `key` attribute |
-| topChildren | `null` | - | Children before the roulette prize list |
-| bottomChildren | `null` | - | Children after the roulette prize list |
+| topChildren | `node` | null | Children before the roulette prize list |
+| bottomChildren | `node` | null | Children after the roulette prize list |
 | design | `string` | 'Regular' | The roulette design. Available designs: Regular, GracefulLines |
 | designOptions | `object` | {} | Design options. See available options below |
 | classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class and `prizeList` - the roulette prize list class |
@@ -139,7 +139,7 @@ Where * means required
 
 Roulette
 
-* withoutAnimation | `boolean` | Should the roulette animations before spinning
+* withoutAnimation | `boolean` | Should there be a roulette animation before spinning
 
 Regular and GracefulLines
 
