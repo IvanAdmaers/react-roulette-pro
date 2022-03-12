@@ -5,10 +5,12 @@ import { nanoid } from 'nanoid';
 import RoulettePro from 'react-roulette-pro';
 import 'react-roulette-pro/dist/index.css';
 
-import './App.css';
-
 import reproductionArray from './utills/reproductionArray';
 import getRandomIntInRange from './utills/getRandomIntInRange';
+
+import sound from './sounds/rickroll.mp3';
+
+import './App.css';
 
 const Toast = Swal.mixin({
   toast: true,
@@ -165,6 +167,11 @@ const App = () => {
       value: false,
       forDesign: 'GracefulLines',
     },
+    soundWhileSpinning: {
+      name: 'Sound while spinning',
+      options: [false, true],
+      value: false,
+    },
   });
 
   const [prizeList, setPrizeList] = useState([]);
@@ -248,6 +255,7 @@ const App = () => {
   };
 
   const design = settings.design.value;
+  const soundWhileSpinning = settings.soundWhileSpinning.value;
 
   const designOptions = getDesignOptions(settings);
 
@@ -325,6 +333,7 @@ const App = () => {
               ? `designOptions={{${designOptionsString}}}`
               : ''
           }
+          ${soundWhileSpinning ? `soundWhileSpinning="${sound}"` : ''}
         />
       `}
       </code>
@@ -346,6 +355,7 @@ const App = () => {
             classes={{
               wrapper: 'roulette-pro-wrapper-additional-styles',
             }}
+            soundWhileSpinning={soundWhileSpinning ? sound : null}
           />
         </div>
         <div
