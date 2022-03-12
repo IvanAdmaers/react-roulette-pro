@@ -132,6 +132,7 @@ Where * means required
 | design | `string` | 'Regular' | The roulette design. Available designs: Regular, GracefulLines |
 | designOptions | `object` | {} | Design options. See available options below |
 | classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class and `prizeList` - the roulette prize list class |
+| soundWhileSpinning | `string` | null | Path to a sound file that will be played while the roulette spinning |
 
 ---
 
