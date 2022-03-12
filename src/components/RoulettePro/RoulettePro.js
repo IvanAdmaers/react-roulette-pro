@@ -19,6 +19,8 @@ import classNames from './utills/classNames';
 import getPrizeOffset from './utills/getPrizeOffset';
 import getPrizeAdditionalOffset from './utills/getPrizeAdditionalOffset';
 
+import { useAudio } from '../../hooks';
+
 import './styles.css';
 
 const availableDesigns = {
@@ -67,10 +69,13 @@ const RoulettePro = ({
   spinningTime,
   onPrizeDefined,
   classes,
+  soundWhileSpinning,
 }) => {
   const [wrapperWidth, setWrapperWidth] = useState(0);
 
   const wrapperRef = useRef();
+
+  const { start: startSound, stop: stopSound } = useAudio(soundWhileSpinning);
 
   const getSetup = () => {
     const designName = availableDesigns[design] ? design : Regular.name;
@@ -148,16 +153,28 @@ const RoulettePro = ({
       return;
     }
 
+    if (soundWhileSpinning) {
+      startSound();
+    }
+
     const timeout = setTimeout(() => {
       onPrizeDefined();
+
+      if (soundWhileSpinning) {
+        stopSound();
+      }
     }, spinningTime * 1000);
 
     return () => {
       clearTimeout(timeout);
+
+      if (soundWhileSpinning) {
+        stopSound();
+      }
     };
     // to think about is it ok that we exclude onPrizeDefined from dependencies array
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [start, spinningTime]);
+  }, [start, spinningTime, soundWhileSpinning]);
 
   const prizeIndexOffset = useMemo(() => {
     return (
@@ -225,6 +242,7 @@ RoulettePro.propTypes = {
     wrapper: PropTypes.string,
     prizeList: PropTypes.string,
   }),
+  soundWhileSpinning: PropTypes.string,
 };
 
 RoulettePro.defaultProps = {
@@ -236,6 +254,7 @@ RoulettePro.defaultProps = {
   spinningTime: 10,
   onPrizeDefined: () => null,
   classes: {},
+  soundWhileSpinning: null,
 };
 
 export default RoulettePro;
