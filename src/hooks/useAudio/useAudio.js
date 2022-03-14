@@ -37,6 +37,22 @@ const useAudio = (url) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!audio) {
+      return;
+    }
+
+    const listener = () => {
+      stop();
+    };
+
+    audio.addEventListener('ended', listener);
+
+    return () => {
+      audio.removeEventListener('ended', listener);
+    };
+  }, [audio, stop]);
+
   return { isPlaying, start, stop };
 };
 
