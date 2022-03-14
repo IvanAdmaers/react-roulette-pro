@@ -6,7 +6,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
-    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg|ico)$':
+    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg|ico|mp3)$':
       '<rootDir>/__mocks__/fileMock.js',
   },
   testPathIgnorePatterns: [
