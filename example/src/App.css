@@ -57,6 +57,7 @@ body {
   border-radius: 41px;
   padding: 24px 35px;
   box-shadow: 0px 2px 0 2px rgba(155, 106, 0, 0.70);
+  color: #000;
   transition: all 0.3s ease-out;
   background: linear-gradient(to bottom, #ffc12f 0%, #ffe324 50%, #ffc12f 100%);
   text-transform: uppercase;
