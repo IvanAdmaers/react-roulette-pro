@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useAudio = (url) => {
   const [audio, setAudio] = useState(null);
@@ -12,16 +12,16 @@ const useAudio = (url) => {
     setAudio(new Audio(url));
   }, [url]);
 
-  const start = () => {
+  const start = useCallback(() => {
     if (!audio) {
       return;
     }
 
     audio.play();
     setIsPlaying(true);
-  };
+  }, [audio]);
 
-  const stop = () => {
+  const stop = useCallback(() => {
     if (!audio) {
       return;
     }
@@ -29,7 +29,7 @@ const useAudio = (url) => {
     audio.pause();
     audio.currentTime = 0;
     setIsPlaying(false);
-  };
+  }, [audio]);
 
   useEffect(() => {
     return () => {
