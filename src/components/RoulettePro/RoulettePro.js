@@ -172,9 +172,8 @@ const RoulettePro = ({
         stopSound();
       }
     };
-    // to think about is it ok that we exclude onPrizeDefined from dependencies array
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [start, spinningTime, soundWhileSpinning]);
+  }, [start, spinningTime]);
 
   const prizeIndexOffset = useMemo(() => {
     return (
