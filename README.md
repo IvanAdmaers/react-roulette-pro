@@ -133,6 +133,7 @@ Where * means required
 | designOptions | `object` | {} | Design options. See available options below |
 | classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class and `prizeList` - the roulette prize list class |
 | soundWhileSpinning | `string` | null | Path to a sound file that will be played while the roulette spinning |
+| options | `object` | {} | The roulette options. See available options below |
 
 ---
 
@@ -156,6 +157,20 @@ GracefulLines
 * hideTopArrow | `boolean` | Should hide a top arrow
 * hideSideArrows | `boolean` | Should hide side arrows
 * replaceBottomArrowWithTopArrow | `boolean` | Should replace a bottom arrow with a top arrow
+
+**The roulettte options**
+
+Prop: `options`  
+Type: `object`
+
+* stopInCenter - should the roulette stop in the center of prize item after spinning. False by default. Example:
+```jsx
+<RoulettePro
+  ...
+  options={{ stopInCenter: true }}
+  ...
+/>
+```
 
 
 ## FAQ

@@ -172,6 +172,11 @@ const App = () => {
       options: [false, true],
       value: false,
     },
+    stopInCenter: {
+      name: 'Stop in the prize item center',
+      options: [false, true],
+      value: false,
+    },
   });
 
   const [prizeList, setPrizeList] = useState([]);
@@ -256,6 +261,7 @@ const App = () => {
 
   const design = settings.design.value;
   const soundWhileSpinning = settings.soundWhileSpinning.value;
+  const stopInCenter = settings.stopInCenter.value;
 
   const designOptions = getDesignOptions(settings);
 
@@ -334,6 +340,7 @@ const App = () => {
               : ''
           }
           ${soundWhileSpinning ? `soundWhileSpinning="${sound}"` : ''}
+          ${stopInCenter === true ? 'options={{ stopInCenter: true }}' : ''}
         />
       `}
       </code>
@@ -356,6 +363,7 @@ const App = () => {
               wrapper: 'roulette-pro-wrapper-additional-styles',
             }}
             soundWhileSpinning={soundWhileSpinning ? sound : null}
+            options={{ stopInCenter }}
           />
         </div>
         <div

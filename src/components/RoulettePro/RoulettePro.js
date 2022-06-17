@@ -70,12 +70,15 @@ const RoulettePro = ({
   onPrizeDefined,
   classes,
   soundWhileSpinning,
+  options,
 }) => {
   const [wrapperWidth, setWrapperWidth] = useState(0);
 
   const wrapperRef = useRef();
 
   const { start: startSound, stop: stopSound } = useAudio(soundWhileSpinning);
+
+  const { stopInCenter } = options ?? {};
 
   const getSetup = () => {
     const designName = availableDesigns[design] ? design : Regular.name;
@@ -176,11 +179,17 @@ const RoulettePro = ({
   }, [start, spinningTime]);
 
   const prizeIndexOffset = useMemo(() => {
-    return (
-      getPrizeOffset(prizeItemWidth, prizeIndex, wrapperWidth / 2) +
-      getPrizeAdditionalOffset(prizeItemWidth)
+    const prizeOffset = getPrizeOffset(
+      prizeItemWidth,
+      prizeIndex,
+      wrapperWidth / 2,
     );
-  }, [prizeIndex, prizeItemWidth, wrapperWidth]);
+
+    const additionalOffset =
+      stopInCenter === false ? getPrizeAdditionalOffset(prizeItemWidth) : 0;
+
+    return prizeOffset + additionalOffset;
+  }, [prizeIndex, prizeItemWidth, wrapperWidth, stopInCenter]);
 
   const inlineStyles = !start
     ? {}
@@ -242,6 +251,9 @@ RoulettePro.propTypes = {
     prizeList: PropTypes.string,
   }),
   soundWhileSpinning: PropTypes.string,
+  options: PropTypes.shape({
+    stopInCenter: PropTypes.bool,
+  }),
 };
 
 RoulettePro.defaultProps = {
@@ -254,6 +266,9 @@ RoulettePro.defaultProps = {
   onPrizeDefined: () => null,
   classes: {},
   soundWhileSpinning: null,
+  options: {
+    stopInCenter: false,
+  },
 };
 
 export default RoulettePro;
