@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
@@ -75,12 +74,12 @@ it('should render a bottom children', () => {
     <RoulettePro
       start={false}
       prizeIndex={0}
-      bottomChildren={<p>It's already 2022</p>}
+      bottomChildren={<p>It is already 2022</p>}
       prizes={[]}
     />,
   );
 
-  expect(screen.getByText(/it's already 2022/i)).toBeInTheDocument();
+  expect(screen.getByText(/it is already 2022/i)).toBeInTheDocument();
 });
 
 it('should render a list of prizes using the built-in render function', () => {
@@ -143,16 +142,17 @@ describe('roulette spinning', () => {
   const originalGetBoundingClientRect = Element.prototype.getBoundingClientRect;
 
   beforeAll(() => {
-    Element.prototype.getBoundingClientRect = jest.fn(() => {
-      return {
-        width: 900,
-        height: 200,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-      };
-    });
+    Element.prototype.getBoundingClientRect = jest.fn(() => ({
+      width: 900,
+      height: 200,
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      x: -1,
+      y: -1,
+      toJSON: () => null,
+    }));
   });
 
   afterAll(() => {
@@ -197,7 +197,7 @@ it('should add a custom className to the roulette wrapper', () => {
   );
 
   expect(
-    container.firstChild.classList.contains(wrapperClassName),
+    (container.firstChild as HTMLElement).classList.contains(wrapperClassName),
   ).toBeTruthy();
 });
 

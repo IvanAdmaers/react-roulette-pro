@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
-const useAudio = (url) => {
-  const [audio, setAudio] = useState(null);
+const useAudio = (url: string) => {
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {

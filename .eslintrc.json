@@ -27,7 +27,12 @@
     "settings": {
         "react": {
           "version": "16"
-        }
+        },
+        "import/resolver": {
+            "node": {
+              "extensions": [".ts", ".tsx", ".js"]
+            }
+          }
     },
     "rules": {
         "space-before-function-paren": 0,
@@ -37,6 +42,20 @@
         "react/no-unused-prop-types": 0,
         "import/export": 0,
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn"
+        "react-hooks/exhaustive-deps": "warn",
+        "react/function-component-definition": [
+            2,
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+          ],
+        "consistent-return": "off",
+        "import/no-relative-packages": "off",
+        "import/extensions": "off",
+        "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-continue": "off"
     }
 }

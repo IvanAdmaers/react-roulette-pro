@@ -348,46 +348,40 @@ const App = () => {
   );
 
   return (
-    <>
-      <div>
-        <div className="roulette">
-          <RoulettePro
-            prizes={prizeList}
-            design={design}
-            designOptions={designOptions}
-            start={start}
-            prizeIndex={prizeIndex}
-            onPrizeDefined={handlePrizeDefined}
-            spinningTime={3}
-            classes={{
-              wrapper: 'roulette-pro-wrapper-additional-styles',
-            }}
-            soundWhileSpinning={soundWhileSpinning ? sound : null}
-            options={{ stopInCenter }}
-          />
-        </div>
-        <div
-          className={`roulette-actions ${
-            settings.replaceBottomArrowWithTopArrow.value ? 'down' : ''
-          }`}
-        >
-          <div className="gray-block">
-            <div className="button-wrapper">
-              <button
-                onClick={handleStart}
-                className="spin-button"
-                type="button"
-              >
-                Spin
-              </button>
-            </div>
+    <div>
+      <div className="roulette">
+        <RoulettePro
+          prizes={prizeList}
+          design={design}
+          designOptions={designOptions}
+          start={start}
+          prizeIndex={prizeIndex}
+          onPrizeDefined={handlePrizeDefined}
+          spinningTime={3}
+          classes={{
+            wrapper: 'roulette-pro-wrapper-additional-styles',
+          }}
+          soundWhileSpinning={soundWhileSpinning ? sound : null}
+          options={{ stopInCenter }}
+        />
+      </div>
+      <div
+        className={`roulette-actions ${
+          settings.replaceBottomArrowWithTopArrow.value ? 'down' : ''
+        }`}
+      >
+        <div className="gray-block">
+          <div className="button-wrapper">
+            <button onClick={handleStart} className="spin-button" type="button">
+              Spin
+            </button>
           </div>
         </div>
-
-        {settingsElement}
-        {codeElement}
       </div>
-    </>
+
+      {settingsElement}
+      {codeElement}
+    </div>
   );
 };
 

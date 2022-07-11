@@ -2,14 +2,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import sound from '../../../example/src/sounds/rickroll.mp3';
-
 import useAudio from '.';
+
+const soundURL = '../../../example/src/sounds/rickroll.mp3';
 
 describe('useAudio hook', () => {
   it('should not playing on start', () => {
     const Component = () => {
-      const { isPlaying } = useAudio(sound);
+      const { isPlaying } = useAudio(soundURL);
 
       return <p>Is palying: {`${isPlaying}`}</p>;
     };
@@ -21,7 +21,7 @@ describe('useAudio hook', () => {
 
   it('should start playing after clicking the button', () => {
     const Component = () => {
-      const { isPlaying, start } = useAudio(sound);
+      const { isPlaying, start } = useAudio(soundURL);
 
       const handlePlay = () => {
         start();
@@ -48,7 +48,7 @@ describe('useAudio hook', () => {
 
   it('should start and stop playing sound', () => {
     const Component = () => {
-      const { isPlaying, start, stop } = useAudio(sound);
+      const { isPlaying, start, stop } = useAudio(soundURL);
 
       const handlePlay = () => {
         start();

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react';
 
 import {
@@ -7,12 +6,17 @@ import {
   prizeItemRenderFunction as regularRenderFunction,
   defaultPrizeItemWidth as regularDefaultPrizeItemWidth,
 } from './designs/Regular';
+import type { RegularTopType } from './designs/Regular';
 import {
   GracefulLinesTop,
   GracefulLinesBottom,
   prizeItemRenderFunction as gracefulLinesRenderFunction,
   defaultPrizeItemWidth as gracefulLinesDefaultPrizeItemWidth,
   wrapperClassName as gracefulLinesWrapperClassName,
+} from './designs/GracefulLines';
+import type {
+  GracefulLinesTopType,
+  GracefulLinesBottomType,
 } from './designs/GracefulLines';
 
 import classNames from './utills/classNames';
@@ -57,28 +61,72 @@ const availableDesigns = {
 
 const { Regular } = availableDesigns;
 
+type PrizeType = {
+  id: string | number;
+  image: string;
+  text?: string;
+};
+
+type DesignOptionsType = {
+  withoutAnimation?: boolean;
+  // Regular & GracefulLines
+  prizeItemWidth?: number;
+  prizeItemHeight?: number;
+} & RegularTopType &
+  GracefulLinesTopType &
+  GracefulLinesBottomType;
+
+type ClassesType = {
+  wrapper?: string;
+  prizeList?: string;
+};
+
+type OptionsType = {
+  stopInCenter?: boolean;
+};
+
+interface IRouletteProps {
+  start: boolean;
+  prizes: Array<PrizeType>;
+  prizeIndex: number;
+  onPrizeDefined?: Function;
+  spinningTime?: number;
+  prizeItemRenderFunction?: (
+    item: PrizeType,
+    index: number,
+    designOptions: DesignOptionsType,
+  ) => React.ReactNode;
+  topChildren?: React.ReactNode;
+  bottomChildren?: React.ReactNode;
+  design?: string;
+  designOptions?: DesignOptionsType;
+  classes?: ClassesType;
+  soundWhileSpinning?: string;
+  options?: OptionsType;
+}
+
 const RoulettePro = ({
-  topChildren,
-  bottomChildren,
-  design,
-  prizeItemRenderFunction,
+  topChildren = null,
+  bottomChildren = null,
+  design = Regular.name,
+  prizeItemRenderFunction = null,
   prizes,
-  designOptions,
+  designOptions = {},
   start,
   prizeIndex,
-  spinningTime,
-  onPrizeDefined,
-  classes,
-  soundWhileSpinning,
-  options,
-}) => {
+  spinningTime = 10,
+  onPrizeDefined = () => null,
+  classes = {},
+  soundWhileSpinning = null,
+  options = {},
+}: IRouletteProps) => {
   const [wrapperWidth, setWrapperWidth] = useState(0);
 
-  const wrapperRef = useRef();
+  const wrapperRef = useRef<HTMLDivElement>();
 
   const { start: startSound, stop: stopSound } = useAudio(soundWhileSpinning);
 
-  const { stopInCenter } = options ?? {};
+  const { stopInCenter } = options;
 
   const getSetup = () => {
     const designName = availableDesigns[design] ? design : Regular.name;
@@ -144,10 +192,10 @@ const RoulettePro = ({
 
     setCurrentWrapperWidth();
 
-    const listener = window.addEventListener('resize', setCurrentWrapperWidth);
+    window.addEventListener('resize', setCurrentWrapperWidth);
 
     return () => {
-      window.removeEventListener('resize', listener);
+      window.removeEventListener('resize', setCurrentWrapperWidth);
     };
   }, [wrapperRef]);
 
@@ -231,44 +279,6 @@ const RoulettePro = ({
       {bottomChildrenElement}
     </div>
   );
-};
-
-RoulettePro.propTypes = {
-  topChildren: PropTypes.node,
-  bottomChildren: PropTypes.node,
-  design: PropTypes.oneOf(Object.keys(availableDesigns)),
-  prizeItemRenderFunction: PropTypes.func,
-  prizes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  designOptions: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-  ),
-  start: PropTypes.bool.isRequired,
-  prizeIndex: PropTypes.number.isRequired,
-  spinningTime: PropTypes.number,
-  onPrizeDefined: PropTypes.func,
-  classes: PropTypes.shape({
-    wrapper: PropTypes.string,
-    prizeList: PropTypes.string,
-  }),
-  soundWhileSpinning: PropTypes.string,
-  options: PropTypes.shape({
-    stopInCenter: PropTypes.bool,
-  }),
-};
-
-RoulettePro.defaultProps = {
-  topChildren: null,
-  bottomChildren: null,
-  design: Regular.name,
-  prizeItemRenderFunction: null,
-  designOptions: {},
-  spinningTime: 10,
-  onPrizeDefined: () => null,
-  classes: {},
-  soundWhileSpinning: null,
-  options: {
-    stopInCenter: false,
-  },
 };
 
 export default RoulettePro;

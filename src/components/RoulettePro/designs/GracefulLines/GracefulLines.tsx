@@ -1,12 +1,15 @@
-import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
 import './GracefulLines.css';
 
-export const wrapperClassName =
+export const wrapperClassName: string =
   'roulette-pro-graceful-lines-design-wrapper-overrides';
 
-export const GracefulLinesTop = ({ hideTopArrow }) =>
+export type GracefulLinesTopType = {
+  hideTopArrow?: boolean;
+};
+
+export const GracefulLinesTop = ({ hideTopArrow }: GracefulLinesTopType) =>
   !hideTopArrow && (
     <div
       data-testid="design-top"
@@ -14,10 +17,19 @@ export const GracefulLinesTop = ({ hideTopArrow }) =>
     />
   );
 
+GracefulLinesTop.defaultProps = {
+  hideTopArrow: false,
+};
+
+export type GracefulLinesBottomType = {
+  hideSideArrows?: boolean;
+  replaceBottomArrowWithTopArrow?: boolean;
+};
+
 export const GracefulLinesBottom = ({
   hideSideArrows,
   replaceBottomArrowWithTopArrow,
-}) => (
+}: GracefulLinesBottomType) => (
   <div data-testid="design-bottom">
     {!replaceBottomArrowWithTopArrow ? (
       <div className="roulette-pro-graceful-lines-design-bottom-line" />
@@ -42,17 +54,12 @@ export const GracefulLinesBottom = ({
   </div>
 );
 
-GracefulLinesBottom.propTypes = {
-  hideSideArrows: PropTypes.bool,
-  replaceBottomArrowWithTopArrow: PropTypes.bool,
-};
-
 GracefulLinesBottom.defaultProps = {
   hideSideArrows: false,
   replaceBottomArrowWithTopArrow: false,
 };
 
-export const defaultPrizeItemWidth = 170;
+export const defaultPrizeItemWidth: number = 170;
 
 export const prizeItemRenderFunction = (
   { id, image, text },

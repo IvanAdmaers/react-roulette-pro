@@ -1,16 +1,15 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import './Regular.css';
 
-export const RegularTop = ({ hideCenterDelimiter }) =>
+export type RegularTopType = {
+  hideCenterDelimiter?: boolean;
+};
+
+export const RegularTop = ({ hideCenterDelimiter }: RegularTopType) =>
   !hideCenterDelimiter && (
     <div data-testid="design-top" className="roulette-pro-regular-design-top" />
   );
-
-RegularTop.propTypes = {
-  hideCenterDelimiter: PropTypes.bool,
-};
 
 RegularTop.defaultProps = {
   hideCenterDelimiter: false,
@@ -18,7 +17,7 @@ RegularTop.defaultProps = {
 
 export const RegularBottom = () => null;
 
-export const defaultPrizeItemWidth = 205;
+export const defaultPrizeItemWidth: number = 205;
 
 export const prizeItemRenderFunction = (
   { id, image, text },
