@@ -32,17 +32,23 @@ module.exports = {
       type: 'umd',
     },
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   exclude: /nodeModules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       cacheDirectory: true,
+      //     },
+      //   },
+      // },
       {
-        test: /\.(js|jsx)$/,
-        exclude: /nodeModules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-          },
-        },
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
@@ -63,4 +69,7 @@ module.exports = {
       filename: 'index.css',
     }),
   ],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
 };

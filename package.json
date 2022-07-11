@@ -21,6 +21,7 @@
   ],
   "main": "dist/index.js",
   "source": "src/index.js",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=10"
   },
