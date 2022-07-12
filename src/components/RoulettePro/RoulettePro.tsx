@@ -106,19 +106,19 @@ interface IRouletteProps {
 }
 
 const RoulettePro = ({
-  topChildren = null,
-  bottomChildren = null,
-  design = Regular.name,
-  prizeItemRenderFunction = null,
+  topChildren,
+  bottomChildren,
+  design,
+  prizeItemRenderFunction,
   prizes,
-  designOptions = {},
+  designOptions,
   start,
   prizeIndex,
-  spinningTime = 10,
-  onPrizeDefined = () => null,
-  classes = {},
-  soundWhileSpinning = null,
-  options = {},
+  spinningTime,
+  onPrizeDefined,
+  classes,
+  soundWhileSpinning,
+  options,
 }: IRouletteProps) => {
   const [wrapperWidth, setWrapperWidth] = useState(0);
 
@@ -279,6 +279,19 @@ const RoulettePro = ({
       {bottomChildrenElement}
     </div>
   );
+};
+
+RoulettePro.defaultProps = {
+  topChildren: null,
+  bottomChildren: null,
+  design: Regular.name,
+  prizeItemRenderFunction: null,
+  designOptions: {},
+  spinningTime: 10,
+  onPrizeDefined: () => null,
+  classes: {},
+  soundWhileSpinning: null,
+  options: {},
 };
 
 export default RoulettePro;
