@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import useAudio from '.';
 
-const soundURL = '../../../example/src/sounds/rickroll.mp3';
+const soundURL = '/path/to/rickroll.mp3';
 
 describe('useAudio hook', () => {
   it('should not playing on start', () => {
