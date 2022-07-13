@@ -99,7 +99,7 @@ interface IRouletteProps {
   options?: OptionsType;
 }
 
-const RoulettePro = ({
+const Roulette = ({
   topChildren,
   bottomChildren,
   design,
@@ -278,7 +278,7 @@ const RoulettePro = ({
   );
 };
 
-RoulettePro.defaultProps = {
+Roulette.defaultProps = {
   topChildren: null,
   bottomChildren: null,
   design: Regular.name,
@@ -291,4 +291,4 @@ RoulettePro.defaultProps = {
   options: {},
 };
 
-export default RoulettePro;
+export default Roulette;

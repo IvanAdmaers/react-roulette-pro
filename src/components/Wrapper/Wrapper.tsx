@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from 'react';
 
-import classNames from '../RoulettePro/utills/classNames';
+import classNames from '../Roulette/utills/classNames';
 
 import RouletteContext from '../../context/RouletteContext';
 
