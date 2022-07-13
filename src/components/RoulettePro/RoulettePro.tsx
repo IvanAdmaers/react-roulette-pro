@@ -6,7 +6,6 @@ import {
   prizeItemRenderFunction as regularRenderFunction,
   defaultPrizeItemWidth as regularDefaultPrizeItemWidth,
 } from './designs/Regular';
-import type { RegularTopType } from './designs/Regular';
 import {
   GracefulLinesTop,
   GracefulLinesBottom,
@@ -14,12 +13,16 @@ import {
   defaultPrizeItemWidth as gracefulLinesDefaultPrizeItemWidth,
   wrapperClassName as gracefulLinesWrapperClassName,
 } from './designs/GracefulLines';
-import type {
-  GracefulLinesTopType,
-  GracefulLinesBottomType,
-} from './designs/GracefulLines';
 
-import classNames from './utills/classNames';
+import type { DesignOptionsType } from '../../types';
+
+import RouletteContext, {
+  IRouletteContextProps,
+} from '../../context/RouletteContext';
+
+import Wrapper from '../Wrapper';
+import PrizesWrapper from '../PrizesWrapper';
+
 import getPrizeOffset from './utills/getPrizeOffset';
 import getPrizeAdditionalOffset from './utills/getPrizeAdditionalOffset';
 
@@ -66,15 +69,6 @@ type PrizeType = {
   image: string;
   text?: string;
 };
-
-type DesignOptionsType = {
-  withoutAnimation?: boolean;
-  // Regular & GracefulLines
-  prizeItemWidth?: number;
-  prizeItemHeight?: number;
-} & RegularTopType &
-  GracefulLinesTopType &
-  GracefulLinesBottomType;
 
 type ClassesType = {
   wrapper?: string;
@@ -247,37 +241,40 @@ const RoulettePro = ({
         left: `-${prizeIndexOffset}px`,
       };
 
-  const wrapperClasses = classNames(
-    'roulette-pro-wrapper',
-    designWrapperClassName,
-    {
-      [classes.wrapper]: classes.wrapper,
-    },
-  );
-
-  const prizeListClasses = classNames(
-    'roulette-pro-prize-list',
-    {
-      'with-animation': !designOptions.withoutAnimation && !start,
-    },
-    designPrizeListClassName,
-    { [classes.prizeList]: classes.prizeList },
-  );
-
   const prizesElement = useMemo(
     () =>
       prizes.map((item, index) => renderFunction(item, index, designOptions)),
     [designOptions, prizes, renderFunction],
   );
 
+  const contextValue = useMemo<IRouletteContextProps>(
+    () => ({
+      designOptions,
+      start,
+      designPrizeListClassName,
+      prizeListClassName: classes.prizeList,
+      designWrapperClassName,
+      wrapperClassName: classes.wrapper,
+    }),
+    [
+      designOptions,
+      start,
+      designPrizeListClassName,
+      classes,
+      designWrapperClassName,
+    ],
+  );
+
   return (
-    <div ref={wrapperRef} className={wrapperClasses}>
-      {topChildrenElement}
-      <ul style={inlineStyles} className={prizeListClasses}>
-        {prizesElement}
-      </ul>
-      {bottomChildrenElement}
-    </div>
+    <RouletteContext.Provider value={contextValue}>
+      <Wrapper ref={wrapperRef}>
+        {topChildrenElement}
+        <PrizesWrapper tagName="ul" type="circle" style={inlineStyles}>
+          {prizesElement}
+        </PrizesWrapper>
+        {bottomChildrenElement}
+      </Wrapper>
+    </RouletteContext.Provider>
   );
 };
 
