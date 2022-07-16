@@ -4,6 +4,8 @@ import classNames from '../Roulette/utills/classNames';
 
 import RouletteContext from '../../context/RouletteContext';
 
+import './Wrapper.css';
+
 interface IWrapperProps {
   children: React.ReactNode;
   className?: string;

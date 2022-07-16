@@ -28,8 +28,6 @@ import getPrizeAdditionalOffset from './utills/getPrizeAdditionalOffset';
 
 import { useAudio } from '../../hooks';
 
-import './styles.css';
-
 const availableDesigns = {
   Regular: {
     name: 'Regular',

@@ -4,6 +4,8 @@ import RouletteContext from '../../context/RouletteContext';
 
 import classNames from '../Roulette/utills/classNames';
 
+import './PrizesWrapper.css';
+
 interface IPrizesWrapperProps {
   type: 'horizontal' | 'vertical' | 'circle';
   children: React.ReactNode;
