@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import RoulettePro from '../..';
+import RoulettePro from '../../components/Roulette';
 
 it('should render prize items with a default width', () => {
   const [defaultWidth] = [205];

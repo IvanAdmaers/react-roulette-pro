@@ -1,8 +1,8 @@
-import type { RegularTopType } from '../components/Roulette/designs/Regular';
+import type { RegularTopType } from '../designs/Regular';
 import type {
   GracefulLinesTopType,
   GracefulLinesBottomType,
-} from '../components/Roulette/designs/GracefulLines';
+} from '../designs/GracefulLines';
 
 type DesignOptionsType = {
   withoutAnimation?: boolean;

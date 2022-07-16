@@ -5,14 +5,14 @@ import {
   RegularBottom,
   prizeItemRenderFunction as regularRenderFunction,
   defaultPrizeItemWidth as regularDefaultPrizeItemWidth,
-} from './designs/Regular';
+} from '../../designs/Regular';
 import {
   GracefulLinesTop,
   GracefulLinesBottom,
   prizeItemRenderFunction as gracefulLinesRenderFunction,
   defaultPrizeItemWidth as gracefulLinesDefaultPrizeItemWidth,
   wrapperClassName as gracefulLinesWrapperClassName,
-} from './designs/GracefulLines';
+} from '../../designs/GracefulLines';
 
 import type { DesignOptionsType } from '../../types';
 
