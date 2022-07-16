@@ -23,8 +23,7 @@ import RouletteContext, {
 import Wrapper from '../Wrapper';
 import PrizesWrapper from '../PrizesWrapper';
 
-import getPrizeOffset from './utills/getPrizeOffset';
-import getPrizeAdditionalOffset from './utills/getPrizeAdditionalOffset';
+import { getPrizeOffset, getPrizeAdditionalOffset } from '../../utills';
 
 import { useAudio } from '../../hooks';
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import RouletteContext from '../../context/RouletteContext';
 
-import classNames from '../Roulette/utills/classNames';
+import { classNames } from '../../utills';
 
 import './PrizesWrapper.css';
 
