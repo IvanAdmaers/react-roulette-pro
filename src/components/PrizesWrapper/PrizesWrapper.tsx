@@ -30,9 +30,7 @@ const PrizesWrapper = ({
     {
       'with-animation': isWithAnimation,
     },
-    {
-      [type]: isWithAnimation,
-    },
+    [type],
     designPrizeListClassName,
     prizeListClassName,
     className,
