@@ -5,6 +5,7 @@ import {
   RegularBottom,
   prizeItemRenderFunction as regularRenderFunction,
   defaultPrizeItemWidth as regularDefaultPrizeItemWidth,
+  defaultPrizeItemHeight as regularDefaultPrizeItemHeight,
 } from '../../designs/Regular';
 import {
   GracefulLinesTop,
@@ -37,6 +38,7 @@ const availableDesigns = {
     renderFunction: (item, index, designOptions) =>
       regularRenderFunction(item, index, designOptions),
     defaultPrizeItemWidth: regularDefaultPrizeItemWidth,
+    defaultPrizeItemHeight: regularDefaultPrizeItemHeight,
     wrapperClassName: '',
     prizeListClassName: '',
   },
@@ -113,7 +115,7 @@ const Roulette = ({
   options,
   type,
 }: IRouletteProps) => {
-  const [wrapperWidth, setWrapperWidth] = useState(0);
+  const [wrapperSize, setWrapperSize] = useState(0);
 
   const wrapperRef = useRef<HTMLDivElement>();
 
@@ -129,6 +131,7 @@ const Roulette = ({
       getBottomElement,
       renderFunction,
       defaultPrizeItemWidth,
+      defaultPrizeItemHeight,
       wrapperClassName,
       prizeListClassName,
     } = availableDesigns[designName];
@@ -156,6 +159,7 @@ const Roulette = ({
       bottomChildrenElement,
       currentRenderFunction,
       defaultPrizeItemWidth,
+      defaultPrizeItemHeight,
       wrapperClassName,
       prizeListClassName,
     ];
@@ -166,11 +170,15 @@ const Roulette = ({
     bottomChildrenElement,
     renderFunction,
     defaultPrizeItemWidth,
+    defaultPrizeItemHeight,
     designWrapperClassName,
     designPrizeListClassName,
   ] = getSetup();
 
   const prizeItemWidth = designOptions.prizeItemWidth ?? defaultPrizeItemWidth;
+  // prizeItemHeight doesnt doc
+  const prizeItemHeight =
+    designOptions.prizeItemHeight ?? defaultPrizeItemHeight;
 
   useEffect(() => {
     if (!wrapperRef) {
@@ -178,9 +186,15 @@ const Roulette = ({
     }
 
     const setCurrentWrapperWidth = () => {
-      const { width } = wrapperRef.current.getBoundingClientRect();
+      const { width, height } = wrapperRef.current.getBoundingClientRect();
 
-      setWrapperWidth(width);
+      if (type === 'horizontal') {
+        return setWrapperSize(width);
+      }
+
+      if (type === 'vertical') {
+        return setWrapperSize(height);
+      }
     };
 
     setCurrentWrapperWidth();
@@ -190,7 +204,7 @@ const Roulette = ({
     return () => {
       window.removeEventListener('resize', setCurrentWrapperWidth);
     };
-  }, [wrapperRef]);
+  }, [wrapperRef, type]);
 
   useEffect(() => {
     if (!start) {
@@ -220,25 +234,58 @@ const Roulette = ({
   }, [start, spinningTime]);
 
   const prizeIndexOffset = useMemo(() => {
+    const prizeItemSize =
+      type === 'horizontal' ? prizeItemWidth : prizeItemHeight;
+
     const prizeOffset = getPrizeOffset(
-      prizeItemWidth,
+      prizeItemSize,
       prizeIndex,
-      wrapperWidth / 2,
+      wrapperSize / 2,
     );
 
     const additionalOffset =
       stopInCenter === false ? getPrizeAdditionalOffset(prizeItemWidth) : 0;
 
     return prizeOffset + additionalOffset;
-  }, [prizeIndex, prizeItemWidth, wrapperWidth, stopInCenter]);
+  }, [
+    type,
+    prizeIndex,
+    prizeItemWidth,
+    prizeItemHeight,
+    wrapperSize,
+    stopInCenter,
+  ]);
 
-  const inlineStyles = !start
-    ? {}
-    : {
-        transition: `all ${spinningTime}s cubic-bezier(0.0125, 0.1, 0.1, 1) 0s`,
-        // transform: `translate3d(-${prizeIndexOffset}px, 0px, 0px)`,
-        left: `-${prizeIndexOffset}px`,
+  const getInlineStyles = () => {
+    const getAnimationProperty = () => {
+      switch (type) {
+        case 'horizontal':
+          return 'left';
+
+        case 'vertical':
+          return 'top';
+
+        default:
+          throw new Error('Type is unknown');
+      }
+    };
+
+    const animationProperty = getAnimationProperty();
+
+    if (start === false) {
+      return {
+        [animationProperty]: '0',
+        willChange: animationProperty,
       };
+    }
+
+    return {
+      transition: `all ${spinningTime}s cubic-bezier(0.0125, 0.1, 0.1, 1) 0s`,
+      [animationProperty]: `-${prizeIndexOffset}px`,
+    };
+  };
+
+  const inlineStyles = getInlineStyles();
 
   const prizesElement = useMemo(
     () =>

@@ -5,8 +5,17 @@ body {
 
 /* Roulette */
 .roulette {
-  width: 80%;
+  overflow: hidden;
   margin: 0 auto;
+}
+
+.roulette.horizontal {
+  width: 80%;
+}
+
+.roulette.vertical {
+  width: 300px;
+  height: 80vh;
 }
 
 .roulette-pro-wrapper-additional-styles {

@@ -18,6 +18,8 @@ RegularTop.defaultProps = {
 export const RegularBottom = () => null;
 
 export const defaultPrizeItemWidth: number = 205;
+// To handle case when items with text
+export const defaultPrizeItemHeight: number = 174;
 
 export const prizeItemRenderFunction = (
   { id, image, text },

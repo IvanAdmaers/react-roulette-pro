@@ -133,6 +133,11 @@ const API = {
 
 const App = () => {
   const [settings, setSettings] = useState({
+    type: {
+      name: 'Type',
+      options: ['horizontal', 'vertical'],
+      value: 'horizontal',
+    },
     design: {
       name: 'Design',
       options: ['Regular', 'GracefulLines'],
@@ -223,7 +228,6 @@ const App = () => {
 
     const prepare = async () => {
       const newPrizeIndex = await API.getPrizeIndex();
-
       setPrizeIndex(newPrizeIndex);
       setStart(false);
 
@@ -259,6 +263,7 @@ const App = () => {
     setSpinning(false);
   };
 
+  const type = settings.type.value;
   const design = settings.design.value;
   const soundWhileSpinning = settings.soundWhileSpinning.value;
   const stopInCenter = settings.stopInCenter.value;
@@ -329,6 +334,7 @@ const App = () => {
         const prizeList = ${JSON.stringify(prizeList, null, 2)};
 
         <RoulettePro
+          ${type !== settings.type.options[0] ? `type="${type}"` : ''}
           start={${Boolean(start)}}
           prizes={prizeList}
           prizeIndex={${prizeIndex}}
@@ -349,8 +355,9 @@ const App = () => {
 
   return (
     <div>
-      <div className="roulette">
+      <div className={`roulette ${type}`}>
         <RoulettePro
+          type={type}
           prizes={prizeList}
           design={design}
           designOptions={designOptions}
