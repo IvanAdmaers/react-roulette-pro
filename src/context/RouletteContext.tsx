@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import type { DesignOptionsType } from '../types';
+import type { DesignOptionsType, IPrizesWrapperProps } from '../types';
 
 type WrapperType = {
   wrapperClassName?: string;
@@ -15,6 +15,7 @@ type PrizesWrapperType = {
 export interface IRouletteContextProps extends WrapperType, PrizesWrapperType {
   designOptions: DesignOptionsType;
   start: boolean;
+  type: IPrizesWrapperProps['type'];
 }
 
 const RouletteContext = createContext({} as IRouletteContextProps);

@@ -1,21 +1,31 @@
 .roulette-pro-prize-list {
   position: relative;
   display: flex;
-  width: max-content;
   list-style: none;
   margin: 0;
   padding: 0;
-  /* will-change: transform; */
-  /* transition: all 6s cubic-bezier(0.53, 0.08, 0.001, 0.5); */
+}
+
+.roulette-pro-prize-list.horizontal {
+  width: max-content;
   left: 0;
   will-change: left;
 }
 
-.roulette-pro-prize-list.with-animation {
-  animation: roulette-animation 100s linear infinite;
+.roulette-pro-prize-list.vertical {
+  flex-direction: column;
+  align-items: center;
 }
 
-@keyframes roulette-animation {
+.roulette-pro-prize-list.with-animation.horizontal {
+  animation: roulette-horizontal-animation 100s linear infinite;
+}
+
+.roulette-pro-prize-list.with-animation.vertical {
+  animation: roulette-vertical-animation 100s linear infinite;
+}
+
+@keyframes roulette-horizontal-animation {
   0% {
     /* transform: translateX(0); */
     /* left: 0; */
@@ -26,5 +36,15 @@
     /* transform: translateX(-3000px); */
     /* left: -3000px; */
     transform: translate3d(-3000px, 0, 0);
+  }
+}
+
+@keyframes roulette-vertical-animation {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translate3d(0, -3000px, 0);
   }
 }

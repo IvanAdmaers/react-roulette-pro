@@ -4,31 +4,34 @@ import RouletteContext from '../../context/RouletteContext';
 
 import { classNames } from '../../utills';
 
+import type { IPrizesWrapperProps } from '../../types';
+
 import './PrizesWrapper.css';
 
-interface IPrizesWrapperProps {
-  type: 'horizontal' | 'vertical' | 'circle';
-  children: React.ReactNode;
-  className?: string;
-  tagName?: React.ElementType;
-  style?: React.CSSProperties;
-}
-
 const PrizesWrapper = ({
-  type,
   children,
   className,
   tagName: Tag,
   style,
 }: IPrizesWrapperProps) => {
-  const { designOptions, start, designPrizeListClassName, prizeListClassName } =
-    useContext(RouletteContext);
+  const {
+    type,
+    designOptions,
+    start,
+    designPrizeListClassName,
+    prizeListClassName,
+  } = useContext(RouletteContext);
+
+  const isWithAnimation =
+    designOptions.withoutAnimation === false && start === false;
 
   const wrapperClassName = classNames(
     'roulette-pro-prize-list',
     {
-      'with-animation':
-        designOptions.withoutAnimation === false && start === false,
+      'with-animation': isWithAnimation,
+    },
+    {
+      [type]: isWithAnimation,
     },
     designPrizeListClassName,
     prizeListClassName,

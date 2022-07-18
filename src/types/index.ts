@@ -1,3 +1,4 @@
 import DesignOptionsType from './designOptions';
+import IPrizesWrapperProps from './IPrizesWrapperProps';
 
-export { DesignOptionsType };
+export { DesignOptionsType, IPrizesWrapperProps };
