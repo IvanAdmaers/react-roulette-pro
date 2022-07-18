@@ -14,7 +14,7 @@ import {
   wrapperClassName as gracefulLinesWrapperClassName,
 } from '../../designs/GracefulLines';
 
-import type { DesignOptionsType } from '../../types';
+import type { DesignOptionsType, IPrizesWrapperProps } from '../../types';
 
 import RouletteContext, {
   IRouletteContextProps,
@@ -94,6 +94,7 @@ interface IRouletteProps {
   classes?: ClassesType;
   soundWhileSpinning?: string;
   options?: OptionsType;
+  type?: IPrizesWrapperProps['type'];
 }
 
 const Roulette = ({
@@ -110,6 +111,7 @@ const Roulette = ({
   classes,
   soundWhileSpinning,
   options,
+  type,
 }: IRouletteProps) => {
   const [wrapperWidth, setWrapperWidth] = useState(0);
 
@@ -252,6 +254,7 @@ const Roulette = ({
       prizeListClassName: classes.prizeList,
       designWrapperClassName,
       wrapperClassName: classes.wrapper,
+      type,
     }),
     [
       designOptions,
@@ -259,6 +262,7 @@ const Roulette = ({
       designPrizeListClassName,
       classes,
       designWrapperClassName,
+      type,
     ],
   );
 
@@ -286,6 +290,7 @@ Roulette.defaultProps = {
   classes: {},
   soundWhileSpinning: null,
   options: {},
+  type: 'horizontal',
 };
 
 export default Roulette;
