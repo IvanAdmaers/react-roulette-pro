@@ -8,13 +8,9 @@
 
 .roulette-pro-prize-list.horizontal {
   width: max-content;
-  left: 0;
-  will-change: left;
 }
 
 .roulette-pro-prize-list.vertical {
-  top: 0;
-  will-change: top;
   flex-direction: column;
   align-items: center;
 }
