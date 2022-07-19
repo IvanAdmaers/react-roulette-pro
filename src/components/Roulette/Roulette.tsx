@@ -15,7 +15,11 @@ import {
   wrapperClassName as gracefulLinesWrapperClassName,
 } from '../../designs/GracefulLines';
 
-import type { DesignOptionsType, IPrizesWrapperProps } from '../../types';
+import type {
+  DesignOptionsType,
+  IPrizesWrapperProps,
+  PrizeType,
+} from '../../types';
 
 import RouletteContext, {
   IRouletteContextProps,
@@ -62,12 +66,6 @@ const availableDesigns = {
 };
 
 const { Regular } = availableDesigns;
-
-type PrizeType = {
-  id: string | number;
-  image: string;
-  text?: string;
-};
 
 type ClassesType = {
   wrapper?: string;
