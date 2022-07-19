@@ -9,11 +9,17 @@ export interface IRegularDesignProps {
   prizesWithText?: boolean;
 }
 
-const TopChildren = ({
-  hideCenterDelimiter,
-}: Pick<IRegularDesignProps, 'hideCenterDelimiter'>) =>
+interface ITopChildrenProps {
+  hideCenterDelimiter: IRegularDesignProps['hideCenterDelimiter'];
+  type: IDesignPluginProps['type'];
+}
+
+const TopChildren = ({ type, hideCenterDelimiter }: ITopChildrenProps) =>
   hideCenterDelimiter !== true && (
-    <div data-testid="design-top" className="roulette-pro-regular-design-top" />
+    <div
+      data-testid="design-top"
+      className={`roulette-pro-regular-design-top ${type}`}
+    />
   );
 
 const regularDesign =
@@ -27,7 +33,9 @@ const regularDesign =
     }
 
     return {
-      topChildren: <TopChildren hideCenterDelimiter={hideCenterDelimiter} />,
+      topChildren: (
+        <TopChildren type={type} hideCenterDelimiter={hideCenterDelimiter} />
+      ),
       bottomChildren: null,
       prizeItemWidth,
       prizeItemHeight,

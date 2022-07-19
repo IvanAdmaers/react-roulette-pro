@@ -2,8 +2,6 @@
 .roulette-pro-regular-design-top {
   position: absolute;
   z-index: 10;
-  width: 4px;
-  height: 100%;
   background: #ff7524 linear-gradient(0deg, #ef3a28, #ff9305);
   border-radius: 2px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.50);
@@ -12,6 +10,16 @@
   right: 0;
   bottom: 0;
   margin: auto;
+}
+
+.roulette-pro-regular-design-top.horizontal {
+  width: 4px;
+  height: 100%;
+}
+
+.roulette-pro-regular-design-top.vertical {
+  width: 100%;
+  height: 4px;
 }
 
 /* Prize item */
