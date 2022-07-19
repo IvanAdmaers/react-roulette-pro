@@ -14,16 +14,10 @@ const PrizesWrapper = ({
   tagName: Tag,
   style,
 }: IPrizesWrapperProps) => {
-  const {
-    type,
-    designOptions,
-    start,
-    designPrizeListClassName,
-    prizeListClassName,
-  } = useContext(RouletteContext);
+  const { type, options, start, prizeListClassName } =
+    useContext(RouletteContext);
 
-  const isWithAnimation =
-    designOptions.withoutAnimation === false && start === false;
+  const isWithAnimation = options.withoutAnimation !== true && start !== true;
 
   const wrapperClassName = classNames(
     'roulette-pro-prize-list',
@@ -31,7 +25,6 @@ const PrizesWrapper = ({
       'with-animation': isWithAnimation,
     },
     [type],
-    designPrizeListClassName,
     prizeListClassName,
     className,
   );

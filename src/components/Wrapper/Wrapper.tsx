@@ -19,7 +19,6 @@ const Wrapper = forwardRef<RefType, IWrapperProps>(
 
     const wrapperClassName = classNames(
       'roulette-pro-wrapper',
-      rouletteContext.designWrapperClassName,
       rouletteContext.wrapperClassName,
       className,
     );

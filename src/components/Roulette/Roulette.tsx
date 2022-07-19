@@ -1,24 +1,31 @@
 import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react';
 
-import {
-  RegularTop,
-  RegularBottom,
-  prizeItemRenderFunction as regularRenderFunction,
-  defaultPrizeItemWidth as regularDefaultPrizeItemWidth,
-  defaultPrizeItemHeight as regularDefaultPrizeItemHeight,
-} from '../../designs/Regular';
-import {
-  GracefulLinesTop,
-  GracefulLinesBottom,
-  prizeItemRenderFunction as gracefulLinesRenderFunction,
-  defaultPrizeItemWidth as gracefulLinesDefaultPrizeItemWidth,
-  wrapperClassName as gracefulLinesWrapperClassName,
-} from '../../designs/GracefulLines';
+// Default design
+import regularDesign from '../../designs/Regular';
+import type { IRegularDesignProps } from '../../designs/Regular';
+
+// import {
+//   RegularTop,
+//   RegularBottom,
+//   prizeItemRenderFunction as regularRenderFunction,
+//   defaultPrizeItemWidth as regularDefaultPrizeItemWidth,
+//   defaultPrizeItemHeight as regularDefaultPrizeItemHeight,
+// } from '../../designs/Regular';
+// import {
+//   GracefulLinesTop,
+//   GracefulLinesBottom,
+//   prizeItemRenderFunction as gracefulLinesRenderFunction,
+//   defaultPrizeItemWidth as gracefulLinesDefaultPrizeItemWidth,
+//   wrapperClassName as gracefulLinesWrapperClassName,
+// } from '../../designs/GracefulLines';
 
 import type {
-  DesignOptionsType,
+  // DesignOptionsType,
   IPrizesWrapperProps,
   PrizeType,
+  IDesignPlugin,
+  IDesignPluginProps,
+  OptionsType,
 } from '../../types';
 
 import RouletteContext, {
@@ -28,52 +35,52 @@ import RouletteContext, {
 import Wrapper from '../Wrapper';
 import PrizesWrapper from '../PrizesWrapper';
 
-import { getPrizeOffset, getPrizeAdditionalOffset } from '../../utills';
+import {
+  getPrizeOffset,
+  getPrizeAdditionalOffset,
+  classNames,
+} from '../../utills';
 
 import { useAudio } from '../../hooks';
 
-const availableDesigns = {
-  Regular: {
-    name: 'Regular',
-    getTopElement: (options) => (
-      <RegularTop hideCenterDelimiter={options.hideCenterDelimiter} />
-    ),
-    getBottomElement: () => <RegularBottom />,
-    renderFunction: (item, index, designOptions) =>
-      regularRenderFunction(item, index, designOptions),
-    defaultPrizeItemWidth: regularDefaultPrizeItemWidth,
-    defaultPrizeItemHeight: regularDefaultPrizeItemHeight,
-    wrapperClassName: '',
-    prizeListClassName: '',
-  },
-  GracefulLines: {
-    name: 'GracefulLines',
-    getTopElement: (options) => (
-      <GracefulLinesTop hideTopArrow={options.hideTopArrow} />
-    ),
-    getBottomElement: (options) => (
-      <GracefulLinesBottom
-        hideSideArrows={options.hideSideArrows}
-        replaceBottomArrowWithTopArrow={options.replaceBottomArrowWithTopArrow}
-      />
-    ),
-    renderFunction: (item, index, designOptions) =>
-      gracefulLinesRenderFunction(item, index, designOptions),
-    defaultPrizeItemWidth: gracefulLinesDefaultPrizeItemWidth,
-    wrapperClassName: gracefulLinesWrapperClassName,
-    prizeListClassName: '',
-  },
-};
+// const availableDesigns = {
+//   Regular: {
+//     name: 'Regular',
+//     getTopElement: (options) => (
+//       <RegularTop hideCenterDelimiter={options.hideCenterDelimiter} />
+//     ),
+//     getBottomElement: () => <RegularBottom />,
+//     renderFunction: (item, index, designOptions) =>
+//       regularRenderFunction(item, index, designOptions),
+//     defaultPrizeItemWidth: regularDefaultPrizeItemWidth,
+//     defaultPrizeItemHeight: regularDefaultPrizeItemHeight,
+//     wrapperClassName: '',
+//     prizeListClassName: '',
+//   },
+//   GracefulLines: {
+//     name: 'GracefulLines',
+//     getTopElement: (options) => (
+//       <GracefulLinesTop hideTopArrow={options.hideTopArrow} />
+//     ),
+//     getBottomElement: (options) => (
+//       <GracefulLinesBottom
+//         hideSideArrows={options.hideSideArrows}
+//         replaceBottomArrowWithTopArrow={options.replaceBottomArrowWithTopArrow}
+//       />
+//     ),
+//     renderFunction: (item, index, designOptions) =>
+//       gracefulLinesRenderFunction(item, index, designOptions),
+//     defaultPrizeItemWidth: gracefulLinesDefaultPrizeItemWidth,
+//     wrapperClassName: gracefulLinesWrapperClassName,
+//     prizeListClassName: '',
+//   },
+// };
 
-const { Regular } = availableDesigns;
+// const { Regular } = availableDesigns;
 
 type ClassesType = {
   wrapper?: string;
-  prizeList?: string;
-};
-
-type OptionsType = {
-  stopInCenter?: boolean;
+  prizeListWrapper?: string;
 };
 
 interface IRouletteProps {
@@ -85,8 +92,8 @@ interface IRouletteProps {
   prizeItemRenderFunction?: (item: PrizeType, index: number) => React.ReactNode;
   topChildren?: React.ReactNode;
   bottomChildren?: React.ReactNode;
-  design?: string;
-  designOptions?: DesignOptionsType;
+  designPlugin?: ({ type }: IDesignPluginProps) => IDesignPlugin;
+  defaultDesignOptions?: IRegularDesignProps;
   classes?: ClassesType;
   soundWhileSpinning?: string;
   options?: OptionsType;
@@ -96,10 +103,10 @@ interface IRouletteProps {
 const Roulette = ({
   topChildren,
   bottomChildren,
-  design,
+  designPlugin,
   prizeItemRenderFunction,
   prizes,
-  designOptions,
+  defaultDesignOptions,
   start,
   prizeIndex,
   spinningTime,
@@ -117,62 +124,65 @@ const Roulette = ({
 
   const { stopInCenter } = options;
 
-  const getSetup = () => {
-    const designName = availableDesigns[design] ? design : Regular.name;
+  // const getSetup = () => {
+  //   const designName = availableDesigns[design] ? design : Regular.name;
 
-    const {
-      getTopElement,
-      getBottomElement,
-      renderFunction,
-      defaultPrizeItemWidth,
-      defaultPrizeItemHeight,
-      wrapperClassName,
-      prizeListClassName,
-    } = availableDesigns[designName];
+  //   const {
+  //     getTopElement,
+  //     getBottomElement,
+  //     renderFunction,
+  //     defaultPrizeItemWidth,
+  //     defaultPrizeItemHeight,
+  //     wrapperClassName,
+  //     prizeListClassName,
+  //   } = availableDesigns[designName];
 
-    const topChildrenElement = (
-      <Fragment>
-        {getTopElement(designOptions)}
-        {topChildren}
-      </Fragment>
-    );
+  //   const topChildrenElement = (
+  //     <Fragment>
+  //       {getTopElement(designOptions)}
+  //       {topChildren}
+  //     </Fragment>
+  //   );
 
-    const bottomChildrenElement = (
-      <Fragment>
-        {getBottomElement(designOptions)}
-        {bottomChildren}
-      </Fragment>
-    );
+  //   const bottomChildrenElement = (
+  //     <Fragment>
+  //       {getBottomElement(designOptions)}
+  //       {bottomChildren}
+  //     </Fragment>
+  //   );
 
-    const currentRenderFunction = !prizeItemRenderFunction
-      ? renderFunction
-      : prizeItemRenderFunction;
+  //   const currentRenderFunction = !prizeItemRenderFunction
+  //     ? renderFunction
+  //     : prizeItemRenderFunction;
 
-    return [
-      topChildrenElement,
-      bottomChildrenElement,
-      currentRenderFunction,
-      defaultPrizeItemWidth,
-      defaultPrizeItemHeight,
-      wrapperClassName,
-      prizeListClassName,
-    ];
-  };
+  //   return [
+  //     topChildrenElement,
+  //     bottomChildrenElement,
+  //     currentRenderFunction,
+  //     defaultPrizeItemWidth,
+  //     defaultPrizeItemHeight,
+  //     wrapperClassName,
+  //     prizeListClassName,
+  //   ];
+  // };
 
-  const [
-    topChildrenElement,
-    bottomChildrenElement,
-    renderFunction,
-    defaultPrizeItemWidth,
-    defaultPrizeItemHeight,
-    designWrapperClassName,
-    designPrizeListClassName,
-  ] = getSetup();
+  // const [
+  //   topChildrenElement,
+  //   bottomChildrenElement,
+  //   renderFunction,
+  //   defaultPrizeItemWidth,
+  //   defaultPrizeItemHeight,
+  //   designWrapperClassName,
+  //   designPrizeListClassName,
+  // ] = getSetup();
 
-  const prizeItemWidth = designOptions.prizeItemWidth ?? defaultPrizeItemWidth;
-  // prizeItemHeight doesnt doc
-  const prizeItemHeight =
-    designOptions.prizeItemHeight ?? defaultPrizeItemHeight;
+  const design =
+    designPlugin === null
+      ? regularDesign(defaultDesignOptions)({ type })
+      : designPlugin({ type });
+
+  // prizeItemHeight doesn't doc
+  const { prizeItemWidth, prizeItemHeight } = design;
 
   useEffect(() => {
     if (!wrapperRef) {
@@ -283,28 +293,45 @@ const Roulette = ({
 
   const prizesElement = useMemo(
     () =>
-      prizes.map((item, index) => renderFunction(item, index, designOptions)),
-    [designOptions, prizes, renderFunction],
+      prizes.map((item, index) => {
+        if (typeof prizeItemRenderFunction === 'function') {
+          return prizeItemRenderFunction(item, index);
+        }
+
+        return design.prizeItemRenderFunction(item, index);
+      }),
+    [prizes, prizeItemRenderFunction, design],
+  );
+
+  const wrapperClassName = classNames(classes.wrapper, design.classes?.wrapper);
+  const prizeListClassName = classNames(
+    classes.prizeListWrapper,
+    design.classes?.prizeListWrapper,
   );
 
   const contextValue = useMemo<IRouletteContextProps>(
     () => ({
-      designOptions,
+      options,
       start,
-      designPrizeListClassName,
-      prizeListClassName: classes.prizeList,
-      designWrapperClassName,
-      wrapperClassName: classes.wrapper,
+      wrapperClassName,
+      prizeListClassName,
       type,
     }),
-    [
-      designOptions,
-      start,
-      designPrizeListClassName,
-      classes,
-      designWrapperClassName,
-      type,
-    ],
+    [options, start, type, prizeListClassName, wrapperClassName],
+  );
+
+  const topChildrenElement = (
+    <Fragment>
+      {design.topChildren}
+      {topChildren}
+    </Fragment>
+  );
+
+  const bottomChildrenElement = (
+    <Fragment>
+      {design.bottomChildren}
+      {bottomChildren}
+    </Fragment>
   );
 
   return (
@@ -323,9 +350,9 @@ const Roulette = ({
 Roulette.defaultProps = {
   topChildren: null,
   bottomChildren: null,
-  design: Regular.name,
+  designPlugin: null,
   prizeItemRenderFunction: null,
-  designOptions: {},
+  defaultDesignOptions: {},
   spinningTime: 10,
   onPrizeDefined: () => null,
   classes: {},
