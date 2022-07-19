@@ -82,11 +82,7 @@ interface IRouletteProps {
   prizeIndex: number;
   onPrizeDefined?: Function;
   spinningTime?: number;
-  prizeItemRenderFunction?: (
-    item: PrizeType,
-    index: number,
-    designOptions: DesignOptionsType,
-  ) => React.ReactNode;
+  prizeItemRenderFunction?: (item: PrizeType, index: number) => React.ReactNode;
   topChildren?: React.ReactNode;
   bottomChildren?: React.ReactNode;
   design?: string;
