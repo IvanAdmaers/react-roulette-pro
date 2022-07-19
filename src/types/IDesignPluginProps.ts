@@ -1,7 +1,7 @@
-import { IPrizesWrapperProps } from '.';
+import { RouletteType } from '.';
 
 interface IDesignPluginProps {
-  type: IPrizesWrapperProps['type'];
+  type: RouletteType;
 }
 
 export default IDesignPluginProps;

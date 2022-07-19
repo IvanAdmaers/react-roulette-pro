@@ -21,11 +21,12 @@ import type { IRegularDesignProps } from '../../designs/Regular';
 
 import type {
   // DesignOptionsType,
-  IPrizesWrapperProps,
+  // IPrizesWrapperProps,
   PrizeType,
   IDesignPlugin,
   IDesignPluginProps,
   OptionsType,
+  RouletteType,
 } from '../../types';
 
 import RouletteContext, {
@@ -97,7 +98,7 @@ interface IRouletteProps {
   classes?: ClassesType;
   soundWhileSpinning?: string;
   options?: OptionsType;
-  type?: IPrizesWrapperProps['type'];
+  type?: RouletteType;
 }
 
 const Roulette = ({
@@ -338,7 +339,7 @@ const Roulette = ({
     <RouletteContext.Provider value={contextValue}>
       <Wrapper ref={wrapperRef}>
         {topChildrenElement}
-        <PrizesWrapper tagName="ul" type="circle" style={inlineStyles}>
+        <PrizesWrapper tagName="ul" style={inlineStyles}>
           {prizesElement}
         </PrizesWrapper>
         {bottomChildrenElement}

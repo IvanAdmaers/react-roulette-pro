@@ -4,6 +4,7 @@ import IDesignPlugin from './IDesignPlugin';
 import ClassesType from './ClassesType';
 import IDesignPluginProps from './IDesignPluginProps';
 import OptionsType from './OptionsType';
+import RouletteType from './RouletteType';
 
 export {
   IPrizesWrapperProps,
@@ -12,4 +13,5 @@ export {
   ClassesType,
   IDesignPluginProps,
   OptionsType,
+  RouletteType,
 };
