@@ -31,12 +31,11 @@ const regularDesign =
       bottomChildren: null,
       prizeItemWidth,
       prizeItemHeight,
-      prizeItemRenderFunction: ({ id, image, text }, index) => {
+      prizeItemRenderFunction: ({ image, text }) => {
         const withText = prizesWithText === true && text !== undefined;
 
         return (
-          <li
-            key={`${id}-${index}`}
+          <div
             className="roulette-pro-regular-prize-item"
             style={{ width: prizeItemWidth, height: prizeItemHeight }}
           >
@@ -58,7 +57,7 @@ const regularDesign =
                 <p className="roulette-pro-regular-prize-item-text">{text}</p>
               )}
             </div>
-          </li>
+          </div>
         );
       },
       classes: null,

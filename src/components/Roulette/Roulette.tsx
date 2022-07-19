@@ -89,7 +89,7 @@ interface IRouletteProps {
   prizeIndex: number;
   onPrizeDefined?: Function;
   spinningTime?: number;
-  prizeItemRenderFunction?: (item: PrizeType, index: number) => React.ReactNode;
+  prizeItemRenderFunction?: (item: PrizeType) => React.ReactNode;
   topChildren?: React.ReactNode;
   bottomChildren?: React.ReactNode;
   designPlugin?: ({ type }: IDesignPluginProps) => IDesignPlugin;
@@ -291,17 +291,17 @@ const Roulette = ({
 
   const inlineStyles = getInlineStyles();
 
-  const prizesElement = useMemo(
-    () =>
-      prizes.map((item, index) => {
-        if (typeof prizeItemRenderFunction === 'function') {
-          return prizeItemRenderFunction(item, index);
-        }
+  const prizesElement = useMemo(() => {
+    const renderFunction =
+      typeof prizeItemRenderFunction === 'function'
+        ? prizeItemRenderFunction
+        : design.prizeItemRenderFunction;
 
-        return design.prizeItemRenderFunction(item, index);
-      }),
-    [prizes, prizeItemRenderFunction, design],
-  );
+    return prizes.map((item, index) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <li key={`${item.id}-${index}`}>{renderFunction(item)}</li>
+    ));
+  }, [prizes, design.prizeItemRenderFunction, prizeItemRenderFunction]);
 
   const wrapperClassName = classNames(classes.wrapper, design.classes?.wrapper);
   const prizeListClassName = classNames(

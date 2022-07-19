@@ -7,7 +7,7 @@ interface IDesignPlugin {
   bottomChildren?: React.ReactNode;
   prizeItemWidth: number;
   prizeItemHeight: number;
-  prizeItemRenderFunction?: (item: PrizeType, index: number) => React.ReactNode;
+  prizeItemRenderFunction?: (item: PrizeType) => React.ReactNode;
   classes?: ClassesType;
 }
 
