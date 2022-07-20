@@ -1,4 +1,4 @@
-import Regular, { IRegularDesignProps } from './Regular';
+import regular, { IRegularDesignProps } from './regular';
 
 export { IRegularDesignProps };
-export default Regular;
+export default regular;

@@ -82,26 +82,9 @@ it('should render a bottom children', () => {
   expect(screen.getByText(/it is already 2022/i)).toBeInTheDocument();
 });
 
-it('should render a list of prizes using the built-in render function', () => {
-  render(
-    <RoulettePro
-      start={false}
-      prizeIndex={0}
-      design="GracefulLines"
-      prizes={prizes}
-    />,
-  );
-
-  const prizeItems = screen.getAllByRole('listitem');
-
-  prizeItems.forEach((item) =>
-    expect(item).toHaveAttribute('data-testid', 'graceful-design-prize-item'),
-  );
-});
-
 it('should render using a custom prize items function', () => {
   const renderFunction = jest.fn();
-  const designOptions = {};
+  const defaultDesignOptions = {};
 
   render(
     <RoulettePro
@@ -109,17 +92,12 @@ it('should render using a custom prize items function', () => {
       prizeIndex={0}
       prizes={prizes}
       prizeItemRenderFunction={renderFunction}
-      designOptions={designOptions}
+      defaultDesignOptions={defaultDesignOptions}
     />,
   );
 
   prizes.forEach((item, index) => {
-    expect(renderFunction).toHaveBeenNthCalledWith(
-      index + 1,
-      item,
-      index,
-      designOptions,
-    );
+    expect(renderFunction).toHaveBeenNthCalledWith(index + 1, item);
   });
 });
 
@@ -129,7 +107,7 @@ it('should not animate when the specific option passed', () => {
       start={false}
       prizeIndex={0}
       prizes={[]}
-      designOptions={{ withoutAnimation: true }}
+      options={{ withoutAnimation: true }}
     />,
   );
 
@@ -209,7 +187,7 @@ it('should add a custom className to the roulette prize list', () => {
       start={false}
       prizeIndex={0}
       prizes={[]}
-      classes={{ prizeList: prizeListClassName }}
+      classes={{ prizeListWrapper: prizeListClassName }}
     />,
   );
 

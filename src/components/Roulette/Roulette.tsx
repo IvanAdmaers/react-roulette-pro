@@ -1,27 +1,10 @@
 import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react';
 
 // Default design
-import regularDesign from '../../designs/Regular';
-import type { IRegularDesignProps } from '../../designs/Regular';
-
-// import {
-//   RegularTop,
-//   RegularBottom,
-//   prizeItemRenderFunction as regularRenderFunction,
-//   defaultPrizeItemWidth as regularDefaultPrizeItemWidth,
-//   defaultPrizeItemHeight as regularDefaultPrizeItemHeight,
-// } from '../../designs/Regular';
-// import {
-//   GracefulLinesTop,
-//   GracefulLinesBottom,
-//   prizeItemRenderFunction as gracefulLinesRenderFunction,
-//   defaultPrizeItemWidth as gracefulLinesDefaultPrizeItemWidth,
-//   wrapperClassName as gracefulLinesWrapperClassName,
-// } from '../../designs/GracefulLines';
+import regularDesign from '../../designs/regular';
+import type { IRegularDesignProps } from '../../designs/regular';
 
 import type {
-  // DesignOptionsType,
-  // IPrizesWrapperProps,
   PrizeType,
   IDesignPlugin,
   IDesignPluginProps,
@@ -43,41 +26,6 @@ import {
 } from '../../utills';
 
 import { useAudio } from '../../hooks';
-
-// const availableDesigns = {
-//   Regular: {
-//     name: 'Regular',
-//     getTopElement: (options) => (
-//       <RegularTop hideCenterDelimiter={options.hideCenterDelimiter} />
-//     ),
-//     getBottomElement: () => <RegularBottom />,
-//     renderFunction: (item, index, designOptions) =>
-//       regularRenderFunction(item, index, designOptions),
-//     defaultPrizeItemWidth: regularDefaultPrizeItemWidth,
-//     defaultPrizeItemHeight: regularDefaultPrizeItemHeight,
-//     wrapperClassName: '',
-//     prizeListClassName: '',
-//   },
-//   GracefulLines: {
-//     name: 'GracefulLines',
-//     getTopElement: (options) => (
-//       <GracefulLinesTop hideTopArrow={options.hideTopArrow} />
-//     ),
-//     getBottomElement: (options) => (
-//       <GracefulLinesBottom
-//         hideSideArrows={options.hideSideArrows}
-//         replaceBottomArrowWithTopArrow={options.replaceBottomArrowWithTopArrow}
-//       />
-//     ),
-//     renderFunction: (item, index, designOptions) =>
-//       gracefulLinesRenderFunction(item, index, designOptions),
-//     defaultPrizeItemWidth: gracefulLinesDefaultPrizeItemWidth,
-//     wrapperClassName: gracefulLinesWrapperClassName,
-//     prizeListClassName: '',
-//   },
-// };
-
-// const { Regular } = availableDesigns;
 
 type ClassesType = {
   wrapper?: string;
@@ -107,79 +55,30 @@ const Roulette = ({
   designPlugin,
   prizeItemRenderFunction,
   prizes,
-  defaultDesignOptions,
+  defaultDesignOptions = {},
   start,
   prizeIndex,
-  spinningTime,
+  spinningTime = 10,
   onPrizeDefined,
   classes,
   soundWhileSpinning,
-  options,
-  type,
+  options = {},
+  type = 'horizontal',
 }: IRouletteProps) => {
   const [wrapperSize, setWrapperSize] = useState(0);
 
-  const wrapperRef = useRef<HTMLDivElement>();
+  const wrapperRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  const { start: startSound, stop: stopSound } = useAudio(soundWhileSpinning);
+  const { start: startSound, stop: stopSound } = useAudio(
+    soundWhileSpinning ?? '',
+  );
 
   const { stopInCenter } = options;
 
-  // const getSetup = () => {
-  //   const designName = availableDesigns[design] ? design : Regular.name;
-
-  //   const {
-  //     getTopElement,
-  //     getBottomElement,
-  //     renderFunction,
-  //     defaultPrizeItemWidth,
-  //     defaultPrizeItemHeight,
-  //     wrapperClassName,
-  //     prizeListClassName,
-  //   } = availableDesigns[designName];
-
-  //   const topChildrenElement = (
-  //     <Fragment>
-  //       {getTopElement(designOptions)}
-  //       {topChildren}
-  //     </Fragment>
-  //   );
-
-  //   const bottomChildrenElement = (
-  //     <Fragment>
-  //       {getBottomElement(designOptions)}
-  //       {bottomChildren}
-  //     </Fragment>
-  //   );
-
-  //   const currentRenderFunction = !prizeItemRenderFunction
-  //     ? renderFunction
-  //     : prizeItemRenderFunction;
-
-  //   return [
-  //     topChildrenElement,
-  //     bottomChildrenElement,
-  //     currentRenderFunction,
-  //     defaultPrizeItemWidth,
-  //     defaultPrizeItemHeight,
-  //     wrapperClassName,
-  //     prizeListClassName,
-  //   ];
-  // };
-
-  // const [
-  //   topChildrenElement,
-  //   bottomChildrenElement,
-  //   renderFunction,
-  //   defaultPrizeItemWidth,
-  //   defaultPrizeItemHeight,
-  //   designWrapperClassName,
-  //   designPrizeListClassName,
-  // ] = getSetup();
-
   const defaultDesign = regularDesign(defaultDesignOptions)({ type });
 
-  const design = designPlugin === null ? defaultDesign : designPlugin({ type });
+  const design =
+    designPlugin === null ? defaultDesign : designPlugin!({ type });
 
   // prizeItemHeight doesn't doc
   const { prizeItemWidth, prizeItemHeight } = design;
@@ -190,7 +89,7 @@ const Roulette = ({
     }
 
     const setCurrentWrapperWidth = () => {
-      const { width, height } = wrapperRef.current.getBoundingClientRect();
+      const { width, height } = wrapperRef.current!.getBoundingClientRect();
 
       if (type === 'horizontal') {
         return setWrapperSize(width);
@@ -220,7 +119,7 @@ const Roulette = ({
     }
 
     const timeout = setTimeout(() => {
-      onPrizeDefined();
+      onPrizeDefined?.();
 
       if (soundWhileSpinning) {
         stopSound();
@@ -308,7 +207,7 @@ const Roulette = ({
 
     return prizes.map((item, index) => (
       // eslint-disable-next-line react/no-array-index-key
-      <li key={`${item.id}-${index}`}>{renderFunction(item)}</li>
+      <li key={`${item.id}-${index}`}>{renderFunction?.(item)}</li>
     ));
   }, [
     prizes,
@@ -317,9 +216,12 @@ const Roulette = ({
     defaultDesign.prizeItemRenderFunction,
   ]);
 
-  const wrapperClassName = classNames(classes.wrapper, design.classes?.wrapper);
+  const wrapperClassName = classNames(
+    classes?.wrapper,
+    design.classes?.wrapper,
+  );
   const prizeListClassName = classNames(
-    classes.prizeListWrapper,
+    classes?.prizeListWrapper,
     design.classes?.prizeListWrapper,
   );
 
@@ -367,11 +269,11 @@ Roulette.defaultProps = {
   designPlugin: null,
   prizeItemRenderFunction: null,
   defaultDesignOptions: {},
+  options: {},
   spinningTime: 10,
   onPrizeDefined: () => null,
   classes: {},
   soundWhileSpinning: null,
-  options: {},
   type: 'horizontal',
 };
 

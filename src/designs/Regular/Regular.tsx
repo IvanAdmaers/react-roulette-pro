@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Regular.css';
+import './regular.css';
 
 import { IDesignPlugin, IDesignPluginProps } from '../../types';
 
@@ -15,22 +15,18 @@ interface ITopChildrenProps {
 }
 
 const TopChildren = ({ type, hideCenterDelimiter }: ITopChildrenProps) =>
-  hideCenterDelimiter !== true && (
+  hideCenterDelimiter !== true ? (
     <div
       data-testid="design-top"
       className={`roulette-pro-regular-design-top ${type}`}
     />
-  );
+  ) : null;
 
 const regularDesign =
   ({ prizesWithText, hideCenterDelimiter }: IRegularDesignProps) =>
   ({ type }: IDesignPluginProps): IDesignPlugin => {
-    const prizeItemWidth: number = prizesWithText === true ? 205 : 205;
-    const prizeItemHeight: number = prizesWithText === true ? 174 : 174;
-
-    if (typeof type === 'symbol') {
-      console.log('just to temporary avoid `type is defined but never used`');
-    }
+    const prizeItemWidth: number = 205;
+    const prizeItemHeight: number = prizesWithText === true ? 234 : 174;
 
     return {
       topChildren: (
@@ -68,7 +64,7 @@ const regularDesign =
           </div>
         );
       },
-      classes: null,
+      classes: {},
     };
   };
 

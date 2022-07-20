@@ -5,12 +5,12 @@ import RoulettePro from '../../components/Roulette';
 
 import regularDesign from '.';
 
+const { prizeItemWidth, prizeItemHeight } = regularDesign({})({
+  type: 'horizontal',
+});
+
 describe('regularDesign', () => {
   it('should render prize items with a default width and height', () => {
-    const { prizeItemWidth, prizeItemHeight } = regularDesign({})({
-      type: 'horizontal',
-    });
-
     render(
       <RoulettePro
         start={false}
@@ -22,8 +22,8 @@ describe('regularDesign', () => {
     const prizeItems = screen.getAllByRole('listitem');
 
     prizeItems.forEach((item) => {
-      expect(item).toHaveStyle(`width: ${prizeItemWidth}px;`);
-      expect(item).toHaveStyle(`height: ${prizeItemHeight}px;`);
+      expect(item.firstChild).toHaveStyle(`width: ${prizeItemWidth}px;`);
+      expect(item.firstChild).toHaveStyle(`height: ${prizeItemHeight}px;`);
     });
   });
 
@@ -36,6 +36,12 @@ describe('regularDesign', () => {
         defaultDesignOptions={{ hideCenterDelimiter: true }}
       />,
     );
+
+    expect(screen.queryByRole('design-top')).not.toBeInTheDocument();
+  });
+
+  it('should render a center delimiter when the specific option passed', () => {
+    render(<RoulettePro start={false} prizeIndex={0} prizes={[]} />);
 
     expect(screen.queryByRole('design-top')).not.toBeInTheDocument();
   });

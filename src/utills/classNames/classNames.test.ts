@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import classNames from '.';
 
 describe('classNames', () => {

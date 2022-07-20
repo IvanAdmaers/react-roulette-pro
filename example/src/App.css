@@ -10,7 +10,14 @@ body {
 }
 
 .roulette.horizontal {
-  width: 80%;
+  max-width: 1280px;
+  border-radius: 30px;
+}
+
+@media (max-width: 1280px) {
+  .roulette.horizontal {
+    border-radius: 0px;
+  }
 }
 
 .roulette.vertical {
@@ -143,7 +150,7 @@ body {
   border-bottom: 1px solid #ffe124;
   padding: 0;
   margin: 80px auto;
-  width: 80%;
+  max-width: 1280px;
   position: relative;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -179,7 +186,7 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 80px auto;
-  width: 80%;
+  max-width: 1280px;
   position: relative;
   background-color: #111;
   color: #fff;

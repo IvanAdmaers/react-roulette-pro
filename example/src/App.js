@@ -140,7 +140,7 @@ const App = () => {
     },
     design: {
       name: 'Design',
-      options: ['Regular', 'GracefulLines'],
+      options: ['Regular'],
       value: 'Regular',
     },
     prizesWithText: {
@@ -152,26 +152,31 @@ const App = () => {
       name: 'Without animation',
       options: [false, true],
       value: false,
-      forDesign: true,
     },
-    hideTopArrow: {
-      name: 'Hide top arrow',
+    hideCenterDelimiter: {
+      name: 'Hide center delimiter',
       options: [false, true],
       value: false,
-      forDesign: 'GracefulLines',
+      forDesign: 'Regular',
     },
-    hideSideArrows: {
-      name: 'Hide side arrows',
-      options: [false, true],
-      value: false,
-      forDesign: 'GracefulLines',
-    },
-    replaceBottomArrowWithTopArrow: {
-      name: 'Replace bottom arrow with top arrow',
-      options: [false, true],
-      value: false,
-      forDesign: 'GracefulLines',
-    },
+    // hideTopArrow: {
+    //   name: 'Hide top arrow',
+    //   options: [false, true],
+    //   value: false,
+    //   forDesign: 'GracefulLines',
+    // },
+    // hideSideArrows: {
+    //   name: 'Hide side arrows',
+    //   options: [false, true],
+    //   value: false,
+    //   forDesign: 'GracefulLines',
+    // },
+    // replaceBottomArrowWithTopArrow: {
+    //   name: 'Replace bottom arrow with top arrow',
+    //   options: [false, true],
+    //   value: false,
+    //   forDesign: 'GracefulLines',
+    // },
     soundWhileSpinning: {
       name: 'Sound while spinning',
       options: [false, true],
@@ -202,16 +207,8 @@ const App = () => {
       id: `${item.id}--${nanoid()}`,
     }));
 
-    if (settings.prizesWithText.value) {
-      setPrizeList(list);
-
-      return;
-    }
-
-    const listWithoutText = list.map(({ id, image }) => ({ id, image }));
-
-    setPrizeList(listWithoutText);
-  }, [settings.prizesWithText.value]);
+    setPrizeList(list);
+  }, []);
 
   useEffect(() => {
     if (!prizeIndex || start) {
@@ -267,6 +264,9 @@ const App = () => {
   const design = settings.design.value;
   const soundWhileSpinning = settings.soundWhileSpinning.value;
   const stopInCenter = settings.stopInCenter.value;
+  const withoutAnimation = settings.withoutAnimation.value;
+  const prizesWithText = settings.prizesWithText.value;
+  const hideCenterDelimiter = settings.hideCenterDelimiter.value;
 
   const designOptions = getDesignOptions(settings);
 
@@ -325,7 +325,15 @@ const App = () => {
   );
 
   const designOptionsString = getOptionsAsString(settings, design);
-  const isDefaultDesign = settings.design.options[0] === design;
+  const options = Object.entries({
+    stopInCenter,
+    withoutAnimation,
+  });
+  const availableOptions = options.filter((item) => Boolean(item[1]));
+
+  const optionsString = availableOptions
+    .map(([key, value]) => `${key}: ${value}, `)
+    .join('');
 
   const codeElement = (
     <pre className="pre-element">
@@ -339,14 +347,19 @@ const App = () => {
           prizes={prizeList}
           prizeIndex={${prizeIndex}}
           spinningTime={3}
-          ${isDefaultDesign ? '' : `design="${design}"`}
+          ${/* ${isDefaultDesign ? '' : `design="${design}"`} */ ''}
           ${
             designOptionsString
               ? `designOptions={{${designOptionsString}}}`
               : ''
           }
           ${soundWhileSpinning ? `soundWhileSpinning="${sound}"` : ''}
-          ${stopInCenter === true ? 'options={{ stopInCenter: true }}' : ''}
+          ${optionsString !== '' ? `options={{ ${optionsString} }}` : ''}
+          ${
+            prizesWithText === true
+              ? 'defaultDesignOptions={{ prizesWithText: true }}'
+              : ''
+          }
         />
       `}
       </code>
@@ -359,7 +372,7 @@ const App = () => {
         <RoulettePro
           type={type}
           prizes={prizeList}
-          design={design}
+          // design={design}
           designOptions={designOptions}
           start={start}
           prizeIndex={prizeIndex}
@@ -369,12 +382,14 @@ const App = () => {
             wrapper: 'roulette-pro-wrapper-additional-styles',
           }}
           soundWhileSpinning={soundWhileSpinning ? sound : null}
-          options={{ stopInCenter }}
+          options={{ stopInCenter, withoutAnimation }}
+          defaultDesignOptions={{ prizesWithText, hideCenterDelimiter }}
         />
       </div>
       <div
         className={`roulette-actions ${
-          settings.replaceBottomArrowWithTopArrow.value ? 'down' : ''
+          // settings.replaceBottomArrowWithTopArrow.value ? 'down' : ''
+          ''
         }`}
       >
         <div className="gray-block">

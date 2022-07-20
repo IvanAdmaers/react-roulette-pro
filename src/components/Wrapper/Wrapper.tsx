@@ -32,7 +32,7 @@ const Wrapper = forwardRef<RefType, IWrapperProps>(
 );
 
 Wrapper.defaultProps = {
-  className: null,
+  className: undefined,
 };
 
 Wrapper.displayName = 'Wrapper';

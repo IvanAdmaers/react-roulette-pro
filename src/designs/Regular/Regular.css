@@ -27,9 +27,9 @@
   text-align: center;
 }
 
-.roulette-pro-regular-prize-item:first-child .roulette-pro-regular-prize-item-wrapper {
+/* .roulette-pro-regular-prize-item:first-child .roulette-pro-regular-prize-item-wrapper {
   border-left: none;
-}
+} */
 
 .roulette-pro-regular-prize-item-wrapper {
   position: relative;

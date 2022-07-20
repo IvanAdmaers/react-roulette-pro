@@ -11,7 +11,7 @@ import './PrizesWrapper.css';
 const PrizesWrapper = ({
   children,
   className,
-  tagName: Tag,
+  tagName: Tag = 'div',
   style,
 }: IPrizesWrapperProps) => {
   const { type, options, start, prizeListClassName } =
