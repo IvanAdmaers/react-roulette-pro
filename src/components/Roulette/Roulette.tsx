@@ -249,7 +249,7 @@ const Roulette = ({
     );
 
     const additionalOffset =
-      stopInCenter === false ? getPrizeAdditionalOffset(prizeItemWidth) : 0;
+      stopInCenter === false ? getPrizeAdditionalOffset(prizeItemSize) : 0;
 
     return prizeOffset + additionalOffset;
   }, [
