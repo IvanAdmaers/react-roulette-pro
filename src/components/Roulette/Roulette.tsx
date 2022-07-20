@@ -177,10 +177,9 @@ const Roulette = ({
   //   designPrizeListClassName,
   // ] = getSetup();
 
-  const design =
-    designPlugin === null
-      ? regularDesign(defaultDesignOptions)({ type })
-      : designPlugin({ type });
+  const defaultDesign = regularDesign(defaultDesignOptions)({ type });
+
+  const design = designPlugin === null ? defaultDesign : designPlugin({ type });
 
   // prizeItemHeight doesn't doc
   const { prizeItemWidth, prizeItemHeight } = design;
@@ -293,16 +292,30 @@ const Roulette = ({
   const inlineStyles = getInlineStyles();
 
   const prizesElement = useMemo(() => {
-    const renderFunction =
-      typeof prizeItemRenderFunction === 'function'
-        ? prizeItemRenderFunction
-        : design.prizeItemRenderFunction;
+    const getRenderFunction = () => {
+      if (typeof prizeItemRenderFunction === 'function') {
+        return prizeItemRenderFunction;
+      }
+
+      if (typeof design.prizeItemRenderFunction === 'function') {
+        return design.prizeItemRenderFunction;
+      }
+
+      return defaultDesign.prizeItemRenderFunction;
+    };
+
+    const renderFunction = getRenderFunction();
 
     return prizes.map((item, index) => (
       // eslint-disable-next-line react/no-array-index-key
       <li key={`${item.id}-${index}`}>{renderFunction(item)}</li>
     ));
-  }, [prizes, design.prizeItemRenderFunction, prizeItemRenderFunction]);
+  }, [
+    prizes,
+    design.prizeItemRenderFunction,
+    prizeItemRenderFunction,
+    defaultDesign.prizeItemRenderFunction,
+  ]);
 
   const wrapperClassName = classNames(classes.wrapper, design.classes?.wrapper);
   const prizeListClassName = classNames(
