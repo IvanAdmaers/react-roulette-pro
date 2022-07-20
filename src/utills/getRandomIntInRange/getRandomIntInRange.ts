@@ -1,11 +1,7 @@
 /**
  * This function gets a random integer between two values, inclusive
- *
- * @param {number} min - Min number
- * @param {number} max - Max number
- * @returns {number} Random number in a range
  */
-const getRandomIntInRange = (min = 0, max = 0) => {
+const getRandomIntInRange = (min: number, max: number): number => {
   const minNumber = Math.ceil(min);
   const maxNumber = Math.floor(max);
 
