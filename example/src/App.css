@@ -18,6 +18,10 @@ body {
   height: 80vh;
 }
 
+.roulette.vertical .roulette-pro-wrapper-additional-styles {
+  padding: 0;
+}
+
 .roulette-pro-wrapper-additional-styles {
   padding: 33px 0 82px;
   background: rgba(0, 0, 0, 0.6);
