@@ -1,7 +1,7 @@
 import getRandomIntInRange from '../getRandomIntInRange';
 
-const getPrizeAdditionalOffset = (itemWidth = 0) => {
-  const center = itemWidth / 2;
+const getPrizeAdditionalOffset = (itemSize = 0) => {
+  const center = itemSize / 2;
 
   const randomOffset = getRandomIntInRange(-center + 1, center - 1);
 
