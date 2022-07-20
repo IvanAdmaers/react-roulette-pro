@@ -1,3 +1,3 @@
-type RouletteType = 'horizontal' | 'vertical' | 'circular';
+type RouletteType = 'horizontal' | 'vertical';
 
 export default RouletteType;
