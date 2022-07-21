@@ -20,7 +20,7 @@
     "react-roulette-pro"
   ],
   "main": "dist/index.js",
-  "source": "src/index.js",
+  "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "engines": {
     "node": ">=10"
