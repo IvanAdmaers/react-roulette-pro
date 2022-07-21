@@ -9,7 +9,7 @@ import React, {
 
 // Default design
 import regularDesign from '../../designs/Regular';
-import type { IRegularDesignProps } from '../../designs/regular';
+import type { IRegularDesignProps } from '../../designs/Regular';
 
 import type {
   PrizeType,
