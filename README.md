@@ -207,8 +207,8 @@ const RoulettePro = dynamic(() => import('react-roulette-pro'), {
 ```
 🧐 **What version of React does this package support?**  
 📣 Your versions should be:
- - react >=16.8.0
- - react-dom >=16.8.0
+ - react >=17.0.0
+ - react-dom >=17.0.0
  - NodeJS >=10
  
 🧐 **Are pull requests welcome?**  
