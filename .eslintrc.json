@@ -58,6 +58,7 @@
         "import/no-extraneous-dependencies": "off",
         "no-continue": "off",
         "@typescript-eslint/no-unused-vars": ["error"],
-        "no-console": "off"
+        "no-console": "off",
+        "react/require-default-props": "off"
     }
 }

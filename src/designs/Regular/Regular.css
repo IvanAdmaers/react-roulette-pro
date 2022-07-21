@@ -77,3 +77,11 @@
   line-height: 1.2;
   white-space: break-spaces;
 }
+
+.roulette-pro-regular-design-prize-item-horizontal:first-child .roulette-pro-regular-prize-item-wrapper {
+  border-left: 0px;
+}
+
+.roulette-pro-regular-design-prize-item-vertical .roulette-pro-regular-prize-item-wrapper {
+  border-bottom: 0px;
+}

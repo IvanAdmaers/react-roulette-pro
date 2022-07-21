@@ -187,6 +187,11 @@ const App = () => {
       options: [false, true],
       value: false,
     },
+    spinningTime: {
+      name: 'Spinning time',
+      options: ['3', '5', '10', '15', '20'],
+      value: '3',
+    },
   });
 
   const [prizeList, setPrizeList] = useState([]);
@@ -267,6 +272,7 @@ const App = () => {
   const withoutAnimation = settings.withoutAnimation.value;
   const prizesWithText = settings.prizesWithText.value;
   const hideCenterDelimiter = settings.hideCenterDelimiter.value;
+  const spinningTime = +settings.spinningTime.value;
 
   const designOptions = getDesignOptions(settings);
 
@@ -346,7 +352,7 @@ const App = () => {
           start={${Boolean(start)}}
           prizes={prizeList}
           prizeIndex={${prizeIndex}}
-          spinningTime={3}
+          spinningTime={${spinningTime}}
           ${/* ${isDefaultDesign ? '' : `design="${design}"`} */ ''}
           ${
             designOptionsString
@@ -377,7 +383,7 @@ const App = () => {
           start={start}
           prizeIndex={prizeIndex}
           onPrizeDefined={handlePrizeDefined}
-          spinningTime={3}
+          spinningTime={spinningTime}
           classes={{
             wrapper: 'roulette-pro-wrapper-additional-styles',
           }}

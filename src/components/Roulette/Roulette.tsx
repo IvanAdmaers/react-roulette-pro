@@ -1,4 +1,11 @@
-import React, { Fragment, useState, useEffect, useRef, useMemo } from 'react';
+import React, {
+  Fragment,
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from 'react';
 
 // Default design
 import regularDesign from '../../designs/regular';
@@ -10,6 +17,7 @@ import type {
   IDesignPluginProps,
   OptionsType,
   RouletteType,
+  ClassesType,
 } from '../../types';
 
 import RouletteContext, {
@@ -27,18 +35,15 @@ import {
 
 import { useAudio } from '../../hooks';
 
-type ClassesType = {
-  wrapper?: string;
-  prizeListWrapper?: string;
-};
+type PrizeItemRenderFunctionType = (item: PrizeType) => React.ReactNode;
 
 interface IRouletteProps {
   start: boolean;
   prizes: Array<PrizeType>;
   prizeIndex: number;
-  onPrizeDefined?: Function;
+  onPrizeDefined?: () => void;
   spinningTime?: number;
-  prizeItemRenderFunction?: (item: PrizeType) => React.ReactNode;
+  prizeItemRenderFunction?: PrizeItemRenderFunctionType;
   topChildren?: React.ReactNode;
   bottomChildren?: React.ReactNode;
   designPlugin?: ({ type }: IDesignPluginProps) => IDesignPlugin;
@@ -59,7 +64,7 @@ const Roulette = ({
   start,
   prizeIndex,
   spinningTime = 10,
-  onPrizeDefined,
+  onPrizeDefined = () => {},
   classes,
   soundWhileSpinning,
   options = {},
@@ -78,9 +83,8 @@ const Roulette = ({
   const defaultDesign = regularDesign(defaultDesignOptions)({ type });
 
   const design =
-    designPlugin === null ? defaultDesign : designPlugin!({ type });
+    typeof designPlugin !== 'function' ? defaultDesign : designPlugin({ type });
 
-  // prizeItemHeight doesn't doc
   const { prizeItemWidth, prizeItemHeight } = design;
 
   useEffect(() => {
@@ -119,7 +123,7 @@ const Roulette = ({
     }
 
     const timeout = setTimeout(() => {
-      onPrizeDefined?.();
+      onPrizeDefined();
 
       if (soundWhileSpinning) {
         stopSound();
@@ -190,30 +194,37 @@ const Roulette = ({
 
   const inlineStyles = getInlineStyles();
 
+  const getRenderFunction = useCallback((): PrizeItemRenderFunctionType => {
+    if (typeof prizeItemRenderFunction === 'function') {
+      return prizeItemRenderFunction;
+    }
+
+    if (typeof design.prizeItemRenderFunction === 'function') {
+      return design.prizeItemRenderFunction;
+    }
+
+    return defaultDesign.prizeItemRenderFunction as PrizeItemRenderFunctionType;
+  }, [
+    defaultDesign.prizeItemRenderFunction,
+    design.prizeItemRenderFunction,
+    prizeItemRenderFunction,
+  ]);
+
   const prizesElement = useMemo(() => {
-    const getRenderFunction = () => {
-      if (typeof prizeItemRenderFunction === 'function') {
-        return prizeItemRenderFunction;
-      }
-
-      if (typeof design.prizeItemRenderFunction === 'function') {
-        return design.prizeItemRenderFunction;
-      }
-
-      return defaultDesign.prizeItemRenderFunction;
-    };
-
     const renderFunction = getRenderFunction();
 
-    return prizes.map((item, index) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <li key={`${item.id}-${index}`}>{renderFunction?.(item)}</li>
+    const className = classNames(classes?.prizeItem, design.classes?.prizeItem);
+
+    return prizes.map((item) => (
+      <li key={item.id} className={className}>
+        {renderFunction(item)}
+      </li>
     ));
   }, [
     prizes,
-    design.prizeItemRenderFunction,
-    prizeItemRenderFunction,
-    defaultDesign.prizeItemRenderFunction,
+    getRenderFunction,
+    classes?.prizeItem,
+    design.classes?.prizeItem,
   ]);
 
   const wrapperClassName = classNames(
@@ -261,20 +272,6 @@ const Roulette = ({
       </Wrapper>
     </RouletteContext.Provider>
   );
-};
-
-Roulette.defaultProps = {
-  topChildren: null,
-  bottomChildren: null,
-  designPlugin: null,
-  prizeItemRenderFunction: null,
-  defaultDesignOptions: {},
-  options: {},
-  spinningTime: 10,
-  onPrizeDefined: () => null,
-  classes: {},
-  soundWhileSpinning: null,
-  type: 'horizontal',
 };
 
 export default Roulette;

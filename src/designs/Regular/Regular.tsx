@@ -26,7 +26,10 @@ const regularDesign =
   ({ prizesWithText, hideCenterDelimiter }: IRegularDesignProps) =>
   ({ type }: IDesignPluginProps): IDesignPlugin => {
     const prizeItemWidth: number = 205;
-    const prizeItemHeight: number = prizesWithText === true ? 234 : 174;
+    const prizeItemHeightWithoutText = type === 'vertical' ? 172 : 174;
+    const prizeItemHeight: number =
+      prizesWithText === true ? 234 : prizeItemHeightWithoutText;
+    const prizeItemClassName = `roulette-pro-regular-design-prize-item-${type}`;
 
     return {
       topChildren: (
@@ -64,7 +67,9 @@ const regularDesign =
           </div>
         );
       },
-      classes: {},
+      classes: {
+        prizeItem: prizeItemClassName,
+      },
     };
   };
 
