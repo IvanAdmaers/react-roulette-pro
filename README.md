@@ -12,7 +12,9 @@
   </a>
 </div>
 
-**The best** React roulette. Focus on customization, optimization and ease of use. Live example - [react-roulette-pro.ivanadmaers.com](https://react-roulette-pro.ivanadmaers.com)
+**The best** React roulette. Focus on optimization, customization and ease of use. Live example - [react-roulette-pro.ivanadmaers.com](https://react-roulette-pro.ivanadmaers.com)
+
+> React Roulette Pro 3.0.0 realised! See [these release notes](./docs/releases/3.0.0.md) and [this migration guide](./docs/migrations/2.x_to_3.x.md)
 
 <div align="center">
   <a href="https://react-roulette-pro.ivanadmaers.com">
@@ -24,6 +26,8 @@
 
  - 🚀 Optimization
  - 🎨 Easily customizable
+ - 🔌 Design plugins architecture **[🔥NEW🔥]**
+ - 🔫 Two types: horizontal and vertical **[🔥NEW🔥]**
  - 💪 Powerful
  - ✅ Ease of use
  - 📝 MIT license 
@@ -45,7 +49,7 @@ yarn add react-roulette-pro
 ## Usage
 
 ```jsx
-import React, { useState } from  'react';
+import { useState } from  'react';
 
 import RoulettePro from 'react-roulette-pro';
 import 'react-roulette-pro/dist/index.css';
@@ -122,79 +126,30 @@ Where * means required
 | **Prop** | **Type** | **Default value** | **Description** |
 |--|--|--|--|
 | start* | `boolean` | - | Sets when the roulette must start spinning |
-| prizes* | `Array` | - | Array of objects. Objects must have required fields: `id` and `image`. A field `text` is optional. If you use your own render function, only you define the required fields. |
-| prizeIndex* | `number` | - | The index of a prize that must win |
-| onPrizeDefined | `function` | () => null | Function to be called when the roulette stops spinning |
+| prizes* | `Array` | - | Array of objects. Objects must have required fields: `id` and `image`. A field `text` is optional. Each prize must have a unique `id` |
+| prizeIndex* | `number` | - | The index of a prize that will win |
+| type | `string` | horizontal | The roulette type. Available values: horizontal, vertical |
+| onPrizeDefined | `Function` | () => {} | Function to be called when the roulette stops spinning |
 | spinningTime | `number` | 10 | The roulette spinning time in seconds |
-| prizeItemRenderFunction | `function` | (item, index, designOptions) => ( {/* JSX */} ) | Function that renders the roulette prize items. Must returns a `li` element that has a `key` attribute |
-| topChildren | `node` | null | Children before the roulette prize list |
-| bottomChildren | `node` | null | Children after the roulette prize list |
-| design | `string` | 'Regular' | The roulette design. Available designs: Regular, GracefulLines |
-| designOptions | `object` | {} | Design options. See available options below |
-| classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class and `prizeList` - the roulette prize list class |
-| soundWhileSpinning | `string` | null | Path to a sound file that will be played while the roulette spinning |
-| options | `object` | {} | The roulette options. See available options below |
+| prizeItemRenderFunction | `(item) => JSX` | - | Function that renders the roulette prize items |
+| topChildren | `node` | - | Children before the roulette prize list |
+| bottomChildren | `node` | - | Children after the roulette prize list |
+| designPlugin | `(props) => ({})` | - | Design plugin for the roulette. If not setted the roulette will use its default built-in design. See [this guide](./docs/guides/how_to_create_your_own_design_plugin.md) to know how to create your own design plugin |
+| defaultDesignOptions | `object` | {} | Default design options. Available options: `hideCenterDelimiter` - optional, boolean type and `prizesWithText` - optional, boolean type |
+| classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class, `prizeListWrapper` - the roulette prize list class and `prizeItem` - class for prize items |
+| soundWhileSpinning | `string` | - | Path to a sound file that will be played while the roulette spinning |
+| options | `object` | {} | The roulette options. Available options: `stopInCenter` - optional, boolean type and `withoutAnimation` - optional, boolean type |
 
 ---
-
-**Design options**
-
-Roulette
-
-* withoutAnimation | `boolean` | Should there be a roulette animation before spinning
-
-Regular and GracefulLines
-
-* prizeItemWidth | `number` | Prize item width
-* prizeItemHeight | `number` | Prize item height
-
-Regular
-
-* hideCenterDelimiter | `boolean` | Should hide a center delimiter
-
-GracefulLines
-
-* hideTopArrow | `boolean` | Should hide a top arrow
-* hideSideArrows | `boolean` | Should hide side arrows
-* replaceBottomArrowWithTopArrow | `boolean` | Should replace a bottom arrow with a top arrow
-
-**The roulettte options**
-
-Prop: `options`  
-Type: `object`
-
-* stopInCenter - should the roulette stop in the center of prize item after spinning. False by default. Example:
-```jsx
-<RoulettePro
-  ...
-  options={{ stopInCenter: true }}
-  ...
-/>
-```
-
 
 ## FAQ
 
 🧐 **Where can I find an example of how to use the package?**  
-📣 You can find a live example on the site [react-roulette-pro.ivanadmaers.com](https://react-roulette-pro.ivanadmaers.com) and in the [example](https://github.com/IvanAdmaers/react-roulette-pro/tree/main/example) folder.
+📣 You can find a live example on this site - [react-roulette-pro.ivanadmaers.com](https://react-roulette-pro.ivanadmaers.com) and in the [example](https://github.com/IvanAdmaers/react-roulette-pro/tree/main/example) folder.
 
-🧐 **How can I customize the roulette prize items?**  
-📣 You can pass a `prizeItemRenderFunction` to render prize items by yourself. If you need to change prize items width pass the option `prizeItemWidth` to `designOptions`. If you need to change prize items height pass the options `prizeItemHeight` to `designOptions`.
-```jsx
-designOptions={{
-  prizeItemWidth: 200,
-  prizeItemHeight: 300,
-}}
-```
-
-🧐 **How can I add my own CSS styles?**  
-📣 If you need to set a custom className to the roulette use `styles` prop. To set a className to the roulette wrapper set the key `wrapper` with a className as a value to the `styles` prop. The same to set a custom className for prize list element but use the prop `plizeList`.
-```jsx
-styles={{
-  wrapper: 'className-for-wrapper',
-  plizeList: 'className-for-plize-list',
-}}
-```
+🧐 **How can I customize the roulette?**  
+📣 First, you can pass a `prizeItemRenderFunction` to render prize items by yourself. Second, you can use a specific design plugin. Third, you can pass your specific classes via `classes` prop.
+Avoid to rewrite the roulette and its plugins default styles.
 
 🧐 **Is it possible to use this package with SSR?**  
 📣 Of course! This package does not use a global object *window*. You can use this package without any problems. And I'd like to recommend you to use *dynamic* in NextJS to decrease your bundle size and render it only on client side.
@@ -246,6 +201,6 @@ The last command runs webpack dev server
 
 ## License
 
-[MIT](LICENSE.md)
+[MIT](./LICENSE.md)
 
 Copyright (c) 2021-present, Ivan Admaers
