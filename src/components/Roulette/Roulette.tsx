@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 
 // Default design
-import regularDesign from '../../designs/regular';
+import regularDesign from '../../designs/Regular';
 import type { IRegularDesignProps } from '../../designs/regular';
 
 import type {

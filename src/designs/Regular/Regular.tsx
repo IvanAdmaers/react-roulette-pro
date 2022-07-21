@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './regular.css';
+import './Regular.css';
 
 import { IDesignPlugin, IDesignPluginProps } from '../../types';
 
