@@ -31,4 +31,4 @@ export default yourAwesomeDesignPlugin;
 ```
 
 Examples:
-[Built-in regular design](../../src/designs/regular/regular.tsx)
+[Built-in regular design](../../src/designs/Regular/Regular.tsx)
