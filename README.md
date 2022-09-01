@@ -147,6 +147,10 @@ Where * means required
 
 ---
 
+## Design plugins
+
+* [rrp-graceful-lines-plugin](https://github.com/IvanAdmaers/rrp-graceful-lines-plugin)
+
 ## FAQ
 
 🧐 **Where can I find an example of how to use the package?**  
