@@ -49,7 +49,7 @@ yarn add react-roulette-pro
 ## Usage
 
 ```jsx
-import { useState } from  'react';
+import { useState } from 'react';
 
 import RoulettePro from 'react-roulette-pro';
 import 'react-roulette-pro/dist/index.css';
@@ -88,7 +88,7 @@ const reproducedPrizeList = [
 ];
 
 const generateId = () =>
-  Date.now().toString(36) + Math.random().toString(36).substring(2);
+  `${Date.now().toString(36)}-${Math.random().toString(36).substring(2)}`;
 
 const prizeList = reproducedPrizeList.map((prize) => ({
   ...prize,
