@@ -92,7 +92,7 @@ const generateId = () =>
 
 const prizeList = reproducedPrizeList.map((prize) => ({
   ...prize,
-  id: generateId(),
+  id: typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : generateId(),
 }));
 
 const App = () => {
