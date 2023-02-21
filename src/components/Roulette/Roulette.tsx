@@ -95,12 +95,15 @@ const Roulette = ({
     const setCurrentWrapperWidth = () => {
       const { width, height } = wrapperRef.current!.getBoundingClientRect();
 
-      if (type === 'horizontal') {
-        return setWrapperSize(width);
-      }
+      switch (type) {
+        case 'horizontal':
+          return setWrapperSize(width);
 
-      if (type === 'vertical') {
-        return setWrapperSize(height);
+        case 'vertical':
+          return setWrapperSize(height);
+
+        default:
+          console.error(`Unknown roulette type ${type}`);
       }
     };
 
