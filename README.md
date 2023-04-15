@@ -144,6 +144,7 @@ Where * means required
 | classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class, `prizeListWrapper` - the roulette prize list class and `prizeItem` - class for prize items |
 | soundWhileSpinning | `string` | - | Path to a sound file that will be played while the roulette spinning |
 | options | `object` | {} | The roulette options. Available options: `stopInCenter` - optional, boolean type and `withoutAnimation` - optional, boolean type |
+| transitionFunction | `string` | cubic-bezier(0.0125, 0.1, 0.1, 1) | The roulette animation transition function |
 
 ---
 

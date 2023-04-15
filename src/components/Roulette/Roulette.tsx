@@ -43,7 +43,7 @@ interface IRouletteProps {
   prizeIndex: number;
   onPrizeDefined?: () => void;
   spinningTime?: number;
-  animationEffect?: string;
+  transitionFunction?: string;
   prizeItemRenderFunction?: PrizeItemRenderFunctionType;
   topChildren?: React.ReactNode;
   bottomChildren?: React.ReactNode;
@@ -65,7 +65,7 @@ const Roulette = ({
   start,
   prizeIndex,
   spinningTime = 10,
-  animationEffect = 'cubic-bezier(0.0125, 0.1, 0.1, 1)',
+  transitionFunction = 'cubic-bezier(0.0125, 0.1, 0.1, 1)',
   onPrizeDefined = () => {},
   classes,
   soundWhileSpinning,
@@ -192,7 +192,7 @@ const Roulette = ({
     }
 
     return {
-      transition: `all ${spinningTime}s ${animationEffect} 0s`,
+      transition: `all ${spinningTime}s ${transitionFunction} 0s`,
       [animationProperty]: `-${prizeIndexOffset}px`,
     };
   };
