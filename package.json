@@ -8,6 +8,10 @@
     "type": "git",
     "url": "https://github.com/IvanAdmaers/react-roulette-pro"
   },
+  "bugs": {
+    "url": "https://github.com/IvanAdmaers/react-roulette-pro/issues"
+  },
+  "homepage": "https://react-roulette-pro.ivanadmaers.com",
   "private": false,
   "keywords": [
     "react",
