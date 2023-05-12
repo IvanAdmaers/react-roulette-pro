@@ -131,7 +131,7 @@ Where * means required
 | **Prop** | **Type** | **Default value** | **Description** |
 |--|--|--|--|
 | start* | `boolean` | - | Sets when the roulette must start spinning |
-| prizes* | `Array` | - | Array of objects. Objects must have required fields: `id` and `image`. A field `text` is optional. Each prize must have a unique `id` |
+| prizes* | `Array` | - | Array of objects. Objects must have required fields: `id` and `image`. A field `text` is optional. Each prize must have a unique `id`. Make sure you pass enough prize items for correct spinning. See an example in the `Usage` section above. |
 | prizeIndex* | `number` | - | The index of a prize that will win |
 | type | `string` | horizontal | The roulette type. Available values: horizontal, vertical |
 | onPrizeDefined | `Function` | () => {} | Function to be called when the roulette stops spinning |
