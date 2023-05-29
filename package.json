@@ -30,7 +30,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "webpack --watch",
+    "dev": "webpack --watch",
     "build": "webpack",
     "prepare": "npm run build",
     "test": "jest",
