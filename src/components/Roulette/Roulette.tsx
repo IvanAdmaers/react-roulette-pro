@@ -232,6 +232,53 @@ const Roulette = ({
     design.classes?.prizeItem,
   ]);
 
+  /* Guards */
+  useEffect(() => {
+    // This guard makes sure that every prize item has the same width & height
+    if (prizesElement.length === 0) {
+      return;
+    }
+
+    let width = -1;
+    let height = -1;
+
+    const reset = () => {
+      width = -1;
+      height = -1;
+    };
+
+    for (let i = 0; i < prizesElement.length; i += 1) {
+      const item = prizesElement[i]?.props?.children?.props?.style;
+      const itemWidth = item?.width;
+      const itemHeight = item?.height;
+
+      if (width === -1 && height === -1) {
+        width = itemWidth;
+        height = itemHeight;
+
+        continue;
+      }
+
+      if (width === itemWidth && height === itemHeight) {
+        continue;
+      }
+
+      console.error(
+        'One or more prize items have different width or height; therefore, the roulette is incorrectly calculating the offset for the prize item index. All prize items must have the same width and height. Please check your `prizeItemRenderFunction` or `designPlugin` options',
+      );
+
+      break;
+    }
+
+    reset();
+
+    return () => {
+      reset();
+    };
+  }, [prizesElement]);
+
+  /* End guards */
+
   const wrapperClassName = classNames(
     classes?.wrapper,
     design.classes?.wrapper,
