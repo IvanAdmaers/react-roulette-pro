@@ -233,8 +233,9 @@ const Roulette = ({
   ]);
 
   /* Guards */
+
+  // The width & height guard
   useEffect(() => {
-    // This guard makes sure that every prize item has the same width & height
     if (prizesElement.length === 0) {
       return;
     }
@@ -263,6 +264,15 @@ const Roulette = ({
         continue;
       }
 
+      // This guard makes sure that every prize item width and height the same as in designPlugin
+      if (itemWidth !== prizeItemWidth || itemHeight !== prizeItemHeight) {
+        console.error(
+          'One or more prize items have a different width or height than what is set in the designPlugin. Therefore, the roulette is incorrectly calculating the offset for the prize item index. Please check your `prizeItemRenderFunction`. All prize items must have the same width and height as set in the `prizeItemRenderFunction`',
+        );
+      }
+
+      // This guard makes sure that every prize item has the same width & height
+      // TODO: to think about should we stay this guard because actually the first guard covers this check
       console.error(
         'One or more prize items have different width or height; therefore, the roulette is incorrectly calculating the offset for the prize item index. All prize items must have the same width and height. Please check your `prizeItemRenderFunction` or `designPlugin` options',
       );
@@ -275,7 +285,7 @@ const Roulette = ({
     return () => {
       reset();
     };
-  }, [prizesElement]);
+  }, [prizesElement, prizeItemWidth, prizeItemHeight]);
 
   /* End guards */
 
