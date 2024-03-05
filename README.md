@@ -14,7 +14,7 @@
 
 **The best** React roulette. Focus on optimization, customization and ease of use. Live example - [react-roulette-pro.ivanadmaers.com](https://react-roulette-pro.ivanadmaers.com)
 
-> React Roulette Pro 3.0 realised! See [these release notes](./docs/releases/3.0.0.md) and [this migration guide](./docs/migrations/2.x_to_3.x.md)
+> React Roulette Pro 3.0 realised! See [these release notes](./docs/releases/3.x/3.0.0.md) and [this migration guide](./docs/migrations/2.x_to_3.x.md)
 
 <div align="center">
   <a href="https://react-roulette-pro.ivanadmaers.com">
