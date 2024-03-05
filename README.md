@@ -142,7 +142,7 @@ Where * means required
 | designPlugin | `(props) => ({})` | - | Design plugin for the roulette. If not setted the roulette will use its default built-in design. See [this guide](./docs/guides/how_to_create_your_own_design_plugin.md) to know how to create your own design plugin |
 | defaultDesignOptions | `object` | {} | Default design options. Available options: `hideCenterDelimiter` - optional, boolean type and `prizesWithText` - optional, boolean type |
 | classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class, `prizeListWrapper` - the roulette prize list class and `prizeItem` - class for prize items |
-| soundWhileSpinning | `string` | - | Path to a sound file that will be played while the roulette spinning |
+| soundWhileSpinning | `string` | - | Path to a sound file that will be played while the roulette spinning [May be deprecated in the future] |
 | options | `object` | {} | The roulette options. Available options: `stopInCenter` - optional, boolean type and `withoutAnimation` - optional, boolean type |
 | transitionFunction | `string` | cubic-bezier(0.0125, 0.1, 0.1, 1) | The roulette animation transition function |
 
