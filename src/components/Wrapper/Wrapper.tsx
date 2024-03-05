@@ -31,10 +31,6 @@ const Wrapper = forwardRef<RefType, IWrapperProps>(
   },
 );
 
-Wrapper.defaultProps = {
-  className: undefined,
-};
-
 Wrapper.displayName = 'Wrapper';
 
 export default Wrapper;

@@ -36,10 +36,4 @@ const PrizesWrapper = ({
   );
 };
 
-PrizesWrapper.defaultProps = {
-  className: null,
-  tagName: 'div',
-  style: null,
-};
-
 export default PrizesWrapper;
