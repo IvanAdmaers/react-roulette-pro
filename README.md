@@ -48,11 +48,11 @@ yarn add react-roulette-pro
 
 ## Usage
 
-```jsx
+```tsx
 import { useState } from 'react';
 
 import RoulettePro from 'react-roulette-pro';
-import 'react-roulette-pro/dist/index.css';
+import 'react-roulette-pro/dist/index.css'; // <=== Don't forget to import styles
 
 const prizes = [
   {
@@ -74,7 +74,7 @@ const prizes = [
 
 const winPrizeIndex = 0;
 
-const reproductionArray = (array = [], length = 0) => [
+const reproduceArray = <T,>(array: T[], length: number): T[] => [
   ...Array(length)
     .fill('_')
     .map(() => array[Math.floor(Math.random() * array.length)]),
@@ -82,9 +82,9 @@ const reproductionArray = (array = [], length = 0) => [
 
 const reproducedPrizeList = [
   ...prizes,
-  ...reproductionArray(prizes, prizes.length * 3),
+  ...reproduceArray(prizes, prizes.length * 3),
   ...prizes,
-  ...reproductionArray(prizes, prizes.length),
+  ...reproduceArray(prizes, prizes.length),
 ];
 
 const generateId = () =>
