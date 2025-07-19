@@ -45,6 +45,7 @@ interface IRouletteProps {
   spinningTime?: number;
   transitionFunction?: string;
   prizeItemRenderFunction?: PrizeItemRenderFunctionType;
+  getPrizeAdditionalOffsetFunction?: (itemSize: number) => number;
   topChildren?: React.ReactNode;
   bottomChildren?: React.ReactNode;
   designPlugin?: ({ type }: IDesignPluginProps) => IDesignPlugin;
@@ -60,6 +61,7 @@ const Roulette = ({
   bottomChildren,
   designPlugin,
   prizeItemRenderFunction,
+  getPrizeAdditionalOffsetFunction,
   prizes,
   defaultDesignOptions = {},
   start,
@@ -155,8 +157,11 @@ const Roulette = ({
       wrapperSize / 2,
     );
 
-    const additionalOffset =
-      stopInCenter === true ? 0 : getPrizeAdditionalOffset(prizeItemSize);
+    let additionalOffset: number;
+    if (stopInCenter === true) additionalOffset = 0;
+    else if (getPrizeAdditionalOffsetFunction)
+      additionalOffset = getPrizeAdditionalOffsetFunction(prizeItemSize);
+    else additionalOffset = getPrizeAdditionalOffset(prizeItemSize);
 
     return prizeOffset + additionalOffset;
   }, [

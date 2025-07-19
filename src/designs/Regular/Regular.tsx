@@ -7,6 +7,8 @@ import { IDesignPlugin, IDesignPluginProps } from '../../types';
 export interface IRegularDesignProps {
   hideCenterDelimiter?: boolean;
   prizesWithText?: boolean;
+  widthOverride?: number;
+  heightOverride?: number;
 }
 
 interface ITopChildrenProps {
@@ -23,12 +25,21 @@ const TopChildren = ({ type, hideCenterDelimiter }: ITopChildrenProps) =>
   ) : null;
 
 const regularDesign =
-  ({ prizesWithText, hideCenterDelimiter }: IRegularDesignProps) =>
+  ({
+    prizesWithText,
+    hideCenterDelimiter,
+    widthOverride,
+    heightOverride,
+  }: IRegularDesignProps) =>
   ({ type }: IDesignPluginProps): IDesignPlugin => {
-    const prizeItemWidth: number = 205;
+    const prizeItemWidth: number = widthOverride || 205;
     const prizeItemHeightWithoutText = type === 'vertical' ? 172 : 174;
-    const prizeItemHeight: number =
-      prizesWithText === true ? 234 : prizeItemHeightWithoutText;
+    let prizeItemHeight: number;
+    if (heightOverride) prizeItemHeight = heightOverride;
+    else
+      prizeItemHeight =
+        prizesWithText === true ? 234 : prizeItemHeightWithoutText;
+
     const prizeItemClassName = `roulette-pro-regular-design-prize-item-${type}`;
 
     return {

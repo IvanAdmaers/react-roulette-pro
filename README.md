@@ -137,10 +137,11 @@ Where * means required
 | onPrizeDefined | `Function` | () => {} | Function to be called when the roulette stops spinning |
 | spinningTime | `number` | 10 | The roulette spinning time in seconds |
 | prizeItemRenderFunction | `(item) => JSX` | - | Function that renders the roulette prize items |
+| getPrizeAdditionalOffsetFunction | `(number) => number` | - | Function that calculate item extra offset. Can be useful if items have empty space aka gap |
 | topChildren | `node` | - | Children before the roulette prize list |
 | bottomChildren | `node` | - | Children after the roulette prize list |
 | designPlugin | `(props) => ({})` | - | Design plugin for the roulette. If not setted the roulette will use its default built-in design. See [this guide](./docs/guides/how_to_create_your_own_design_plugin.md) to know how to create your own design plugin |
-| defaultDesignOptions | `object` | {} | Default design options. Available options: `hideCenterDelimiter` - optional, boolean type and `prizesWithText` - optional, boolean type |
+| defaultDesignOptions | `object` | {} | Default design options. Available options: `hideCenterDelimiter` - optional, boolean type and `prizesWithText` - optional, boolean type, `heightOverride`, `widthOverride`|
 | classes | `object` | {} | Classes that will be applied to the roulette. Available keys: `wrapper` - the roulette wrapper class, `prizeListWrapper` - the roulette prize list class and `prizeItem` - class for prize items |
 | soundWhileSpinning | `string` | - | Path to a sound file that will be played while the roulette spinning [May be deprecated in the future] |
 | options | `object` | {} | The roulette options. Available options: `stopInCenter` - optional, boolean type and `withoutAnimation` - optional, boolean type |
